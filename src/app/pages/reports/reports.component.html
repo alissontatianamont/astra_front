@@ -1,0 +1,117 @@
+<div class="content">
+  <div class=" row">
+    <div class=" col-md-2 col-12">
+      <div class=" card card-chart d-flex justify-content-center align-items-center">
+        <h1 class="text-white mb-0 pt-2 pb-3">Reportes</h1>
+      </div>
+    </div>
+  </div>
+  <div class="card card-chart p-4 p-md-0">
+    <div class="row justify-content-center py-2">
+      <div class="col-12 col-md-2 d-flex align-items-center justify-content-center ml-3">
+        <mat-form-field>
+          <input matInput [matDatepicker]="startPicker" placeholder="Fecha inicio" [(ngModel)]="startDate">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-md-2 d-flex align-items-center justify-content-center">
+        <mat-form-field>
+          <input matInput [matDatepicker]="endPicker" placeholder="Fecha final" [(ngModel)]="endDate">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-md-2 d-flex align-items-center justify-content-center">
+        <mat-form-field>
+          <mat-label>Parametros a mostrar</mat-label>
+          <mat-select [formControl]="employees" multiple>
+            <mat-select-trigger>
+              {{employees.value?.[0] || ''}}
+              <span *ngIf="(employees.value?.length || 0) > 1" class="example-additional-selection">
+                (+{{(employees.value?.length || 0) - 1}} {{employees.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let employee of employeeList" [value]="employee">{{employee}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-md-2 d-flex align-items-center justify-content-center">
+        <mat-form-field>
+          <mat-label>Filtrar por empleado</mat-label>
+          <mat-select [formControl]="drivers" multiple>
+            <mat-select-trigger>
+              {{drivers.value?.[0] || ''}}
+              <span *ngIf="(drivers.value?.length || 0) > 1" class="example-additional-selection">
+                (+{{(drivers.value?.length || 0) - 1}} {{drivers.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let driver of driversList" [value]="driver">{{driver}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-md-2 d-flex align-items-center justify-content-center">
+        <button mat-button (click)="getData()" class="btn">Generar informe</button>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 px-0">
+        <mat-form-field>
+          <mat-label class="custom-label">Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input class="custom-input">
+        </mat-form-field>
+        <div class="mat-elevation-z8">
+          <div id="table-content">
+            <table mat-table [dataSource]="dataSource" matSort class="table">
+              <ng-container matColumnDef="employee">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre conductor </th>
+                <td mat-cell *matCellDef="let row"> {{row.employee}} </td>
+              </ng-container>
+              <ng-container matColumnDef="route_travel">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ruta </th>
+                <td mat-cell *matCellDef="let row"> {{row.route_travel}} </td>
+              </ng-container>
+              <ng-container matColumnDef="freight">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Flete </th>
+                <td mat-cell *matCellDef="let row"> {{row.freight}} </td>
+              </ng-container>
+              <ng-container matColumnDef="money_advance">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Anticipo </th>
+                <td mat-cell *matCellDef="let row"> {{row.money_advance}} </td>
+              </ng-container>
+              <ng-container matColumnDef="total_expenses">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total gastos </th>
+                <td mat-cell *matCellDef="let row"> {{row.total_expenses}} </td>
+              </ng-container>
+              <ng-container matColumnDef="final_profit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ganancia final </th>
+                <td mat-cell *matCellDef="let row"> {{row.final_profit}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No hay coincidencias con: "{{input.value}}"</td>
+              </tr>
+            </table>
+          </div>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+        <button mat-button class=" btn btn-danger btn-block">Obtener plantilla</button>
+      </div>
+      <div class="col-12 mt-3 mt-md-0 col-md-6 d-flex justify-content-center align-items-center">
+        <button mat-button class=" btn btn-danger btn-block">Imprimir Informe</button>
+      </div>
+    </div>
+  </div>
+</div>

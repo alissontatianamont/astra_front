@@ -1,0 +1,130 @@
+[
+    {
+        "employee": "David Mora",
+        "route_travel": "Bogotá - Medellín",
+        "freight": "$2,500,000",
+        "money_advance": "$2,000,000",
+        "total_expenses": "$1,800,000",
+        "final_profit": "$2,300,000"
+    },
+    {
+        "employee": "Antonio Castillo",
+        "route_travel": "Medellín - Cali",
+        "freight": "$3,200,000",
+        "money_advance": "$2,800,000",
+        "total_expenses": "$2,500,000",
+        "final_profit": "$3,100,000"
+    },
+    {
+        "employee": "Jose Nunez",
+        "route_travel": "Cali - Barranquilla",
+        "freight": "$2,700,000",
+        "money_advance": "$2,300,000",
+        "total_expenses": "$2,000,000",
+        "final_profit": "$2,600,000"
+    },
+    {
+        "employee": "Pablo Vargas",
+        "route_travel": "Barranquilla - Cartagena",
+        "freight": "$3,000,000",
+        "money_advance": "$2,600,000",
+        "total_expenses": "$2,300,000",
+        "final_profit": "$2,900,000"
+    },
+    {
+        "employee": "Miguel Soto",
+        "route_travel": "Cartagena - Santa Marta",
+        "freight": "$2,800,000",
+        "money_advance": "$2,400,000",
+        "total_expenses": "$2,100,000",
+        "final_profit": "$2,700,000"
+    },
+    {
+        "employee": "David Mora",
+        "route_travel": "Santa Marta - Barranquilla",
+        "freight": "$3,200,000",
+        "money_advance": "$2,900,000",
+        "total_expenses": "$2,600,000",
+        "final_profit": "$3,100,000"
+    },
+    {
+        "employee": "Antonio Castillo",
+        "route_travel": "Barranquilla - Bogotá",
+        "freight": "$2,900,000",
+        "money_advance": "$2,500,000",
+        "total_expenses": "$2,200,000",
+        "final_profit": "$2,800,000"
+    },
+    {
+        "employee": "Jose Nunez",
+        "route_travel": "Bogotá - Medellín",
+        "freight": "$3,300,000",
+        "money_advance": "$2,800,000",
+        "total_expenses": "$2,500,000",
+        "final_profit": "$3,100,000"
+    },
+    {
+        "employee": "Pablo Vargas",
+        "route_travel": "Medellín - Cali",
+        "freight": "$2,900,000",
+        "money_advance": "$2,500,000",
+        "total_expenses": "$2,200,000",
+        "final_profit": "$2,800,000"
+    },
+    {
+        "employee": "Miguel Soto",
+        "route_travel": "Cali - Barranquilla",
+        "freight": "$3,100,000",
+        "money_advance": "$2,700,000",
+        "total_expenses": "$2,400,000",
+        "final_profit": "$3,000,000"
+    },
+    {
+        "employee": "David Mora",
+        "route_travel": "Barranquilla - Cartagena",
+        "freight": "$2,800,000",
+        "money_advance": "$2,400,000",
+        "total_expenses": "$2,100,000",
+        "final_profit": "$2,700,000"
+    },
+    {
+        "employee": "Antonio Castillo",
+        "route_travel": "Cartagena - Santa Marta",
+        "freight": "$3,300,000",
+        "money_advance": "$2,900,000",
+        "total_expenses": "$2,600,000",
+        "final_profit": "$3,100,000"
+    },
+    {
+        "employee": "Jose Nunez",
+        "route_travel": "Santa Marta - Barranquilla",
+        "freight": "$3,000,000",
+        "money_advance": "$2,600,000",
+        "total_expenses": "$2,300,000",
+        "final_profit": "$2,900,000"
+    },
+    {
+        "employee": "Pablo Vargas",
+        "route_travel": "Barranquilla - Bogotá",
+        "freight": "$2,800,000",
+        "money_advance": "$2,400,000",
+        "total_expenses": "$2,100,000",
+        "final_profit": "$2,700,000"
+    },
+    {
+        "employee": "Miguel Soto",
+        "route_travel": "Bogotá - Medellín",
+        "freight": "$3,100,000",
+        "money_advance": "$2,700,000",
+        "total_expenses": "$2,400,000",
+        "final_profit": "$3,000,000"
+    },
+    {
+        "employee": "David Mora",
+        "route_travel": "Medellín - Cali",
+        "freight": "$3,300,000",
+        "money_advance": "$2,900,000",
+        "total_expenses": "$2,600,000",
+        "final_profit": "$3,100,000"
+    }
+]

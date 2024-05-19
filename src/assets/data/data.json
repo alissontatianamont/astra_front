@@ -1,0 +1,23 @@
+[
+    {"id": "1", "employee": "John Doe", "freight": "$2,500,000", "route_travel": "Bogotá - Medellín", "status": "Pendiente de inicio"},
+    {"id": "2", "employee": "Jane Smith", "freight": "$1,800,000", "route_travel": "Cali - Cartagena", "status": "En curso"},
+    {"id": "3", "employee": "Bob Johnson", "freight": "$3,200,000", "route_travel": "Barranquilla - Pereira", "status": "Finalizado"},
+    {"id": "4", "employee": "John Doe", "freight": "$2,100,000", "route_travel": "Medellín - Bogotá", "status": "Pendiente de inicio"},
+    {"id": "5", "employee": "Jane Smith", "freight": "$1,950,000", "route_travel": "Pereira - Barranquilla", "status": "En curso"},
+    {"id": "6", "employee": "Bob Johnson", "freight": "$2,800,000", "route_travel": "Cartagena - Cali", "status": "Finalizado"},
+    {"id": "7", "employee": "John Doe", "freight": "$1,600,000", "route_travel": "Bogotá - Medellín", "status": "Pendiente de inicio"},
+    {"id": "8", "employee": "Jane Smith", "freight": "$2,300,000", "route_travel": "Cali - Cartagena", "status": "En curso"},
+    {"id": "9", "employee": "Bob Johnson", "freight": "$3,400,000", "route_travel": "Barranquilla - Pereira", "status": "Finalizado"},
+    {"id": "10", "employee": "John Doe", "freight": "$2,700,000", "route_travel": "Medellín - Bogotá", "status": "Pendiente de inicio"},
+    {"id": "11", "employee": "Jane Smith", "freight": "$1,500,000", "route_travel": "Pereira - Barranquilla", "status": "En curso"},
+    {"id": "12", "employee": "Bob Johnson", "freight": "$2,000,000", "route_travel": "Cartagena - Cali", "status": "Finalizado"},
+    {"id": "13", "employee": "John Doe", "freight": "$2,900,000", "route_travel": "Bogotá - Medellín", "status": "Pendiente de inicio"},
+    {"id": "14", "employee": "Jane Smith", "freight": "$1,700,000", "route_travel": "Cali - Cartagena", "status": "En curso"},
+    {"id": "15", "employee": "Bob Johnson", "freight": "$3,100,000", "route_travel": "Barranquilla - Pereira", "status": "Finalizado"},
+    {"id": "16", "employee": "John Doe", "freight": "$2,400,000", "route_travel": "Medellín - Bogotá", "status": "Pendiente de inicio"},
+    {"id": "17", "employee": "Jane Smith", "freight": "$2,200,000", "route_travel": "Pereira - Barranquilla", "status": "En curso"},
+    {"id": "18", "employee": "Bob Johnson", "freight": "$3,300,000", "route_travel": "Cartagena - Cali", "status": "Finalizado"},
+    {"id": "19", "employee": "John Doe", "freight": "$2,600,000", "route_travel": "Bogotá - Medellín", "status": "Pendiente de inicio"},
+    {"id": "20", "employee": "Jane Smith", "freight": "$1,850,000", "route_travel": "Cali - Cartagena", "status": "En curso"}
+  ]
+  

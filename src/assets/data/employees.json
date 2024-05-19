@@ -1,0 +1,149 @@
+[
+    {
+        "employee": "Juan Perez",
+        "id_card": "1234567890",
+        "position": "Conductor",
+        "hire_date": "2022-05-15",
+        "status": "activo"
+    },
+    {
+        "employee": "Pedro Martinez",
+        "id_card": "2345678901",
+        "position": "Conductor",
+        "hire_date": "2023-02-20",
+        "status": "activo"
+    },
+    {
+        "employee": "Luis Rodriguez",
+        "id_card": "3456789012",
+        "position": "Conductor",
+        "hire_date": "2022-11-10",
+        "status": "activo"
+    },
+    {
+        "employee": "Carlos Sanchez",
+        "id_card": "4567890123",
+        "position": "Conductor",
+        "hire_date": "2023-07-03",
+        "status": "activo"
+    },
+    {
+        "employee": "Jorge Lopez",
+        "id_card": "5678901234",
+        "position": "Conductor",
+        "hire_date": "2022-09-18",
+        "status": "activo"
+    },
+    {
+        "employee": "Mario Gonzalez",
+        "id_card": "6789012345",
+        "position": "Conductor",
+        "hire_date": "2022-04-25",
+        "status": "activo"
+    },
+    {
+        "employee": "Fernando Hernandez",
+        "id_card": "7890123456",
+        "position": "Conductor",
+        "hire_date": "2023-01-12",
+        "status": "activo"
+    },
+    {
+        "employee": "Roberto Ramirez",
+        "id_card": "8901234567",
+        "position": "Conductor",
+        "hire_date": "2022-08-05",
+        "status": "activo"
+    },
+    {
+        "employee": "Alberto Torres",
+        "id_card": "9012345678",
+        "position": "Conductor",
+        "hire_date": "2023-05-30",
+        "status": "activo"
+    },
+    {
+        "employee": "Ricardo Flores",
+        "id_card": "0123456789",
+        "position": "Conductor",
+        "hire_date": "2022-10-22",
+        "status": "activo"
+    },
+    {
+        "employee": "Daniel Chavez",
+        "id_card": "1230123456",
+        "position": "Conductor",
+        "hire_date": "2022-06-08",
+        "status": "activo"
+    },
+    {
+        "employee": "Emilio Mendoza",
+        "id_card": "2341234567",
+        "position": "Conductor",
+        "hire_date": "2023-03-17",
+        "status": "activo"
+    },
+    {
+        "employee": "Gustavo Reyes",
+        "id_card": "3452345678",
+        "position": "Conductor",
+        "hire_date": "2022-12-29",
+        "status": "activo"
+    },
+    {
+        "employee": "Hector Fernandez",
+        "id_card": "4563456789",
+        "position": "Conductor",
+        "hire_date": "2023-08-14",
+        "status": "activo"
+    },
+    {
+        "employee": "Arturo Ramos",
+        "id_card": "5674567890",
+        "position": "Conductor",
+        "hire_date": "2022-07-01",
+        "status": "activo"
+    },
+    {
+        "employee": "Martin Ortiz",
+        "id_card": "6785678901",
+        "position": "Conductor",
+        "hire_date": "2023-04-10",
+        "status": "activo"
+    },
+    {
+        "employee": "Miguel Soto",
+        "id_card": "7896789012",
+        "position": "Conductor",
+        "hire_date": "2022-11-27",
+        "status": "activo"
+    },
+    {
+        "employee": "Pablo Vargas",
+        "id_card": "8907890123",
+        "position": "Conductor",
+        "hire_date": "2023-06-19",
+        "status": "activo"
+    },
+    {
+        "employee": "Jose Nunez",
+        "id_card": "9018901234",
+        "position": "Conductor",
+        "hire_date": "2022-09-03",
+        "status": "activo"
+    },
+    {
+        "employee": "Antonio Castillo",
+        "id_card": "0129012345",
+        "position": "Conductor",
+        "hire_date": "2022-05-30",
+        "status": "activo"
+    },
+    {
+        "employee": "David Mora",
+        "id_card": "1234567890",
+        "position": "Conductor",
+        "hire_date": "2023-02-15",
+        "status": "activo"
+    }
+]

@@ -1,0 +1,103 @@
+<div class=" content">
+    <div class=" row">
+        <div class=" col-12 col-md-2 ">
+            <div class=" card card-chart d-flex justify-content-center align-items-center">
+                <h1 class="text-white mb-0 pt-2 pb-3">Certificado laboral</h1>
+            </div>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12 ">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <mat-form-field class="w-100" class="w-100">
+                        <mat-label>Tipo de certificado</mat-label>
+                        <mat-select>
+                          <mat-option value="option">Certificado laboral sin salario</mat-option>
+                          <mat-option value="option">Certificado laboral con salario</mat-option>
+                        </mat-select>
+                        
+                      </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <button mat-button class=" btn btn-danger btn-block" >Crear nuevo certificado <b>+</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-chart pt-3 px-5 pb-5 mt-5">
+                <div class="row">
+                    <div class="col-6">
+                        <h2>Datos de certificado</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="w-100">
+                            <mat-label >Titulo</mat-label>
+                            <input matInput>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="w-100">
+                            <mat-label >Empresa que emite</mat-label>
+                            <input matInput>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="w-100">
+                            <mat-label >Nit empresa</mat-label>
+                            <input matInput>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="w-100">
+                            <mat-label >Nombre de quien firma</mat-label>
+                            <input matInput>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="w-100">
+                            <mat-label >Email de contacto</mat-label>
+                            <input matInput>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="w-100">
+                            <mat-label >Numero de contacto</mat-label>
+                            <input matInput>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="w-100">
+                            <mat-label >Direccióne contacto</mat-label>
+                            <input matInput>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="w-100">
+                            <mat-label >Teléfono de contacto</mat-label>
+                            <input matInput>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <button mat-button class=" btn btn-danger btn-block" (click)="saveData()">Ajustar datos de certificado</button>
+                      </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
