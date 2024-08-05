@@ -1,43 +1,35 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { Routes, RouterModule } from "@angular/router";
-
+import { RouterModule, Routes } from "@angular/router";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { LoginComponent } from "./pages/login/login.component";
+import { AuthGuard } from "./auth.guard";
+import { NoAuthGuard } from "./no-auth.guard";
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
   {
-    path: "login",
-    component: LoginComponent,
-  },
-  {
-    path: "",
-    redirectTo: "dashboard",
-    pathMatch: "full"
-  },
-  {
-    path: "",
+    path: '',
     component: AdminLayoutComponent,
+    canActivateChild: [AuthGuard],
     children: [
       {
-        path: "",
-        loadChildren: () => import("./layouts/admin-layout/admin-layout.module").then(m => m.AdminLayoutModule)
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: '',
+        loadChildren: () =>
+          import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
       }
     ]
   },
-  {
-    path: "**",
-    redirectTo: "dashboard"
-  }
+  { path: 'dashboard', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: 'dashboard' }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(routes, {
-      useHash: false
-    })
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

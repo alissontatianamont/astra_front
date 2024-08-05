@@ -1,24 +1,24 @@
 <div class="body-login">
   <div class="overlay"></div>
     <section class="container d-flex justify-content-center cont-login">
-      <form class="card card-chart card-login p-4">
+      <form (ngSubmit)="login()" class="card card-chart card-login p-4">
         <h2>Log In</h2>
         <div class="form-group">
 
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>Correo</mat-label>
-            <input matInput type="email" id="exampleInputEmail1" placeholder="Enter email">
+            <input matInput type="email" [(ngModel)]="email"  name="email" placeholder="Enter email">
           </mat-form-field>
           <small class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>Contraseña</mat-label>
-            <input matInput type="password" id="exampleInputPassword1" placeholder="Password">
+            <input matInput type="password" [(ngModel)]="password" name="password" placeholder="Password">
           </mat-form-field>
         </div>
         <div class="d-flex justify-content-center mt-3">
-          <a routerLink="/dashboard" class=" btn btn-danger btn-block">Iniciar sesión</a>
+          <button type="submit" class=" btn btn-danger btn-block">Iniciar sesión</button>
         </div>
       </form>
     </section>

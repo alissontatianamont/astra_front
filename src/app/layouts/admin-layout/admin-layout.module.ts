@@ -14,6 +14,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import { MatInputModule } from "@angular/material/input";
+import { MatIconModule } from '@angular/material/icon';
 import { MatSortModule } from "@angular/material/sort";
 import { TravelsComponent } from "src/app/pages/travels/travels.component";
 import { EmployeesComponent } from "src/app/pages/employees/employees.component";
@@ -28,6 +29,9 @@ import { CreateEmployeesComponent } from "src/app/modal_forms/create-employees/c
 import { ViewEmployeeComponent } from "src/app/modal_views/view-employee/view-employee.component";
 import { CertificationsComponent } from "src/app/pages/certifications/certifications.component";
 import { CKEditorModule } from 'ckeditor4-angular';
+import { AuthInterceptor } from "../../auth.interceptor";
+import { AuthService } from "src/app/services/auth.service";
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,6 +43,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     MatSortModule, 
     MatMenuModule,
     MatButtonModule,
@@ -63,6 +68,9 @@ import { CKEditorModule } from 'ckeditor4-angular';
     CertificationsComponent
   ],
   exports: [CreateRoutesComponent],
+  providers: [AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   
 })
 export class AdminLayoutModule {

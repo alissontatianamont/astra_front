@@ -1,8 +1,42 @@
-<h2 mat-dialog-title>Todo sobre este empleado</h2>
-<mat-dialog-content class="mat-typography ">
-  <div class="container-fluid">
-    <p>Información empleado</p>
+<h2 class="text-center mt-3" mat-dialog-title>Todo sobre este empleado</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+   <div class="row pl-md-5 pr-md-5">
+    <div class="col-md-6">
+      <ul class=" list-unstyled text-white">
+        <li>
+          <h3> <strong>Nombre</strong></h3>
+        <p class="data-modal">{{ employeeData.employee }}</p>
+        </li>
+        <li>
+          <h3> <strong>Cedula</strong> </h3>
+          <p class="data-modal">{{ employeeData.id_card }}</p>
+        </li>
+        <li>
+          <h3> <strong>Teléfono</strong></h3>
+          <p class="data-modal">{{ employeeData.phone }}</p>
+        </li>
+        <li>
+          <h3> <strong>Cargo</strong></h3>
+          <p class="data-modal">{{ employeeData.position == '1' ? 'Conductor' : 'Administrador' }}</p>
+        </li>
+        <li>
+          <h3> <strong>Email</strong></h3>
+          <p class="data-modal">{{ employeeData.email }}</p>
+        </li>
+        <li>
+          <h3> <strong>Estado</strong></h3>
+          <p class="data-modal">{{ employeeData.status == '1' ? 'Activo' : 'Inactivo' }}</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6 d-flex align-items-center">
+      <img  [src]="imageSrc"  alt="{{employeeData.avatar}}" srcset="">
+     </div>
    </div>
+   
+  </div>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close class="btn-modal">Cerrar</button>
