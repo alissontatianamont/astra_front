@@ -18,23 +18,38 @@
           <table mat-table [dataSource]="dataSource" matSort>
 
             <!-- ID Column -->
-            <ng-container matColumnDef="id">
+            <ng-container matColumnDef="viaje_id">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
-              <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.viaje_id}} </td>
             </ng-container>
   
-            <ng-container matColumnDef="employee">
+            <ng-container matColumnDef="viaje_nombre_conducto">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre conductor </th>
-              <td mat-cell *matCellDef="let row"> {{row.employee}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.viaje_nombre_conducto}} </td>
             </ng-container>
-            <!-- Progress Column -->
-            <ng-container matColumnDef="freight">
+            <ng-container matColumnDef="viaje_ruta">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Ruta </th>
+              <td mat-cell *matCellDef="let row"> {{row.viaje_destino_inicio + ' - ' + row.viaje_destino_llegada }} </td>
+            </ng-container>
+            <ng-container matColumnDef="viaje_flete">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Flete </th>
-              <td mat-cell *matCellDef="let row"> {{row.freight}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.viaje_flete || 0 | currency}} </td>
             </ng-container>
-            <ng-container matColumnDef="route_travel">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> ruta </th>
-              <td mat-cell *matCellDef="let row"> {{row.route_travel}} </td>
+            <ng-container matColumnDef="viaje_neto_pago">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Neto a pagar </th>
+              <td mat-cell *matCellDef="let row"> {{row.viaje_neto_pago || 0 | currency}} </td>
+            </ng-container>
+            <ng-container matColumnDef="viaje_anticipo">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Anticipo </th>
+              <td mat-cell *matCellDef="let row"> {{row.viaje_anticipo || 0 | currency}} </td>
+            </ng-container>
+            <ng-container matColumnDef="viaje_total_gastos">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Total gastos </th>
+              <td mat-cell *matCellDef="let row"> {{ row.viaje_total_gastos || 0 | currency }}  </td>
+            </ng-container>
+            <ng-container matColumnDef="viaje_total_ganancias">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Total ganancias </th>
+              <td mat-cell *matCellDef="let row"> {{row.viaje_total_ganancias || 0 | currency}} </td>
             </ng-container>
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
@@ -42,7 +57,7 @@
                 <button class=" btn btn-dropdown" mat-button [matMenuTriggerFor]="menu">Acciones <i
                     class="fa-solid fa-sort-down"></i></button>
                 <mat-menu #menu="matMenu" class="dropdown-content">
-                  <button mat-menu-item (click)="openDialog()">Editar</button>
+                  <button mat-menu-item (click)="editRoute(row.viaje_id)">Editar</button>
                   <button mat-menu-item (click)="openView()">Ver detalles de viaje</button>
                   <button mat-menu-item (click)="openView()">Añadir nuevo gasto</button>
                   <button mat-menu-item (click)="openView()">asignar datos transportadora</button>

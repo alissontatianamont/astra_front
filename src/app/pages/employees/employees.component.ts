@@ -41,8 +41,6 @@ export class EmployeesComponent implements OnInit {
 
   loadData() {
     this.authService.getUsers().subscribe((data: any) => {
-      console.log(data);
-      
       // Mapea los datos recibidos a la estructura esperada por la tabla
       const employees: EmployeeData[] = data.map(user => ({
        

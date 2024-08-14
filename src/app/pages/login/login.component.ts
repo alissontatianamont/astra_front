@@ -19,7 +19,8 @@ login(){
   this.authService.login(this.email, this.password).subscribe(
     response =>{
       localStorage.setItem('accessToken', response.accessToken);
-      console.log( response.accessToken);
+      localStorage.setItem('usuario_id', response.user.usuario_id.toString());
+      console.log( response);
       
       this.router.navigate(['/dashboard']);
     },

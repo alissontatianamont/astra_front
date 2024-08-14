@@ -33,12 +33,13 @@ export class AuthService {
   login(email:string, password:string):Observable<any>{
     return this.http.post<any>(`${this.base_api}login`,{email,password});
   }
-
+  getUserId(): number | null {
+    const userId = localStorage.getItem('usuario_id');
+    return userId ? parseInt(userId, 10) : null;
+  }
   logout() {
     const token = localStorage.getItem('accessToken');
     if (token) {
-      console.log(token);
-      
       this.http.get(`${this.base_api}logout`).subscribe({
         next: () => {
           localStorage.removeItem('accessToken');

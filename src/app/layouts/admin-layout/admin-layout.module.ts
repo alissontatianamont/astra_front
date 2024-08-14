@@ -67,7 +67,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ViewEmployeeComponent,
     CertificationsComponent
   ],
-  exports: [CreateRoutesComponent],
+  // exports: [CreateRoutesComponent],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],

@@ -86,16 +86,15 @@ getFile(event: any):any{
 
   OnSubmit(){
     let fecha = new Date(this.user.fecha_contratacion);
-let formatoFecha = new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
-let fechaFormateada = formatoFecha.format(fecha);
+    let formatoFecha = new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    let fechaFormateada = formatoFecha.format(fecha);
 
     this.formdata = new FormData();
     if (this.file_user == null ) {
-      console.log("sin: "+this.file_user);
+     // console.log("sin: "+this.file_user);
       this.formdata.append('avatar', this.user.avatar);
     } else {
-      console.log("con: "+this.file_user);
-      
+      // console.log("con: "+this.file_user);
       this.formdata.append('avatar', this.file_user, this.file_user.name);
 
     }
@@ -108,14 +107,14 @@ let fechaFormateada = formatoFecha.format(fecha);
     this.formdata.append("telefono", this.user.telefono);
     this.formdata.append("fecha_contratacion",fechaFormateada );
     
-    console.log(this.formdata);
+    // console.log(this.formdata);
     
     if (this.id_user !== undefined) {
-      console.log(this.id_user);
+      // console.log(this.id_user);
       
       this.authService.updateUser(this.formdata, this.id_user).subscribe({
         next:(response)=>{
-          console.log('good',response);
+          // console.log('good',response);
           Swal.fire({
             position: "center",
             icon: "success",
@@ -129,17 +128,13 @@ let fechaFormateada = formatoFecha.format(fecha);
         error:(error)=>{
           console.error('bad',error);
         },
-        complete:()=>{
-          console.log('request completed');
-          
-        }
       })
     }else{
       this.authService.createUser(this.formdata).subscribe({
         next:(response)=>{
-          console.log(this.formdata);
+          // console.log(this.formdata);
           
-          console.log('good',response);
+          // console.log('good',response);
           Swal.fire({
             position: "center",
             icon: "success",
@@ -153,10 +148,6 @@ let fechaFormateada = formatoFecha.format(fecha);
         error:(error)=>{
           console.error('bad',error);
         },
-        complete:()=>{
-          console.log('request completed');
-          
-        }
       })
     }
     
