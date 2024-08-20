@@ -1,0 +1,40 @@
+<h2 class="text-center mt-3" mat-dialog-title>Detalles transportadora</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container">
+   <div class="row pl-md-5 pr-md-5">
+    <div class="col-md-6 col-12">
+      <ul class=" list-unstyled text-white">
+        <li>
+          <h3> <strong>Razón social</strong></h3>
+        <p class="data-modal">{{ carrierData.transportadora_razon_social }}</p>
+        </li>
+        <li>
+          <h3> <strong>Dirección</strong> </h3>
+          <p class="data-modal">{{ carrierData.transportadora_direccion }}</p>
+        </li>
+        <li>
+          <h3> <strong>Ciudad</strong></h3>
+          <p class="data-modal">{{ carrierData.transportadora_ciudad }}</p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6 col-12">
+        <ul>
+            <li>
+                <h3> <strong>Nit</strong></h3>
+                <p class="data-modal">{{ carrierData.transportadora_nit  }} - {{ carrierData.transportadora_dv}}</p>
+              </li>
+              <li>
+                <h3> <strong>Teléfono</strong></h3>
+                <p class="data-modal">{{ carrierData.transportadora_telefono }}</p>
+              </li>
+        </ul>
+    </div>
+   </div>
+   
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="btn-modal">Cerrar</button>
+</mat-dialog-actions>

@@ -60,9 +60,8 @@
                   <button mat-menu-item (click)="editRoute(row.viaje_id)">Editar</button>
                   <button mat-menu-item (click)="openView()">Ver detalles de viaje</button>
                   <button mat-menu-item (click)="openView()">Añadir nuevo gasto</button>
-                  <button mat-menu-item (click)="openView()">asignar datos transportadora</button>
                   <button mat-menu-item (click)="openView()">Finalizar ruta</button>
-                  <button mat-menu-item>Eliminar ruta de viaje</button>
+                  <button mat-menu-item (click)="deleteRoute(row.viaje_id)">Eliminar ruta de viaje</button>
                 </mat-menu>
               </td>
             </ng-container>

@@ -1,0 +1,76 @@
+<div class=" content">
+    <div class=" row">
+        <div class="col-12 col-md-3">
+            <div class=" card card-chart d-flex justify-content-center align-items-center">
+                <h1 class="text-white mb-0 pt-2 pb-3">Mis transportadoras</h1>
+            </div>
+        </div>
+    </div>
+    <mat-form-field>
+        <mat-label class="custom-label">Buscar transportadora</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input class="custom-input">
+      </mat-form-field>
+
+      <div class="mat-elevation-z8">
+        <div id="table-content">
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="transportadora_id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+              <td mat-cell *matCellDef="let row"> {{row.transportadora_id}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="transportadora_razon_social">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Razón social </th>
+              <td mat-cell *matCellDef="let row"> {{row.transportadora_razon_social}} </td>
+            </ng-container>
+            <ng-container matColumnDef="transportadora_nit">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nit </th>
+              <td mat-cell *matCellDef="let row"> {{row.transportadora_nit  }} - {{row.transportadora_dv}} </td>
+            </ng-container>
+            <ng-container matColumnDef="transportadora_direccion">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </th>
+              <td mat-cell *matCellDef="let row"> {{row.transportadora_direccion}} </td>
+            </ng-container>
+            <ng-container matColumnDef="transportadora_telefono">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono </th>
+              <td mat-cell *matCellDef="let row"> {{row.transportadora_telefono}} </td>
+            </ng-container>
+            <ng-container matColumnDef="transportadora_ciudad">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Ciudad </th>
+              <td mat-cell *matCellDef="let row"> {{row.transportadora_ciudad}} </td>
+            </ng-container>
+            <ng-container matColumnDef="transportadora_departamento">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
+              <td mat-cell *matCellDef="let row"> {{ row.transportadora_departamento }}  </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+              <td mat-cell *matCellDef="let row">
+                <button class=" btn btn-dropdown" mat-button [matMenuTriggerFor]="menu">Acciones <i
+                    class="fa-solid fa-sort-down"></i></button>
+                <mat-menu #menu="matMenu" class="dropdown-content">
+                  <button mat-menu-item (click)="editCarrier(row.transportadora_id)" >Editar</button>
+                  <button mat-menu-item (click)="viewCarrier(row.transportadora_id)">Ver detalles </button>
+                  <button mat-menu-item  (click)="deleteCarrier(row.transportadora_id)">Eliminar transportadora</button>
+                </mat-menu>
+              </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No hay coincidencias con: "{{input.value}}"</td>
+            </tr>
+          </table>
+        </div>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+      <div class="col-12 d-flex justify-content-center align-items-center">
+        <button mat-button class=" btn btn-danger btn-block" (click)="openDialog()">Crear nueva transportadora <b>+</b></button>
+      </div>
+</div>

@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Generar nueva transportadora</h2>
+<form (ngSubmit)="OnSubmit()"  #userForm="ngForm">
+<mat-dialog-content class="mat-typography ">
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-4">
+          <mat-form-field>
+            <mat-label>Razón social</mat-label>
+            <input   matInput name="transportadora_razon_social" [(ngModel)]="carriers.transportadora_razon_social">
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-md-4">
+            <mat-form-field>
+                <mat-label>Nit</mat-label>
+                <input name="transportadora_nit" [(ngModel)]="carriers.transportadora_nit" matInput>
+              </mat-form-field>
+        </div>
+        <div class="col-12 col-md-4">
+          <mat-form-field>
+            <mat-label>Dv</mat-label>
+            <input name="transportadora_dv" [(ngModel)]="carriers.transportadora_dv" matInput>
+          </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <mat-form-field class="w-100">
+          <mat-label>Dirección</mat-label>
+          <input name="transportadora_direccion" [(ngModel)]="carriers.transportadora_direccion" matInput>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 col-12">
+        <mat-form-field class="w-100">
+          <mat-label>Teléfono </mat-label>
+          <input name="transportadora_telefono" [(ngModel)]="carriers.transportadora_telefono" matInput>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <mat-form-field class="w-100">
+          <mat-label>Ciudad</mat-label>
+          <input name="transportadora_ciudad" [(ngModel)]="carriers.transportadora_ciudad" matInput>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 col-12">
+        <mat-form-field class="w-100">
+          <mat-label>Departamento</mat-label>
+          <input name="transportadora_departamento" [(ngModel)]="carriers.transportadora_departamento" matInput>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <button mat-button type="submit">Guardar</button>
+</mat-dialog-content>
+</form>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="btn-modal">Cerrar</button>
+</mat-dialog-actions>

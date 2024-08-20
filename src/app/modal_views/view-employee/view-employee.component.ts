@@ -1,7 +1,6 @@
 import { Component, OnInit,Inject  } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
-import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 
 export interface EmployeeData {
@@ -36,7 +35,7 @@ export class ViewEmployeeComponent implements OnInit {
   avatarName: any;
   imageSrc: any;
 
-  constructor(private authService: AuthService, private http: HttpClient,@Inject(MAT_DIALOG_DATA) public data:any) { 
+  constructor(private authService: AuthService,@Inject(MAT_DIALOG_DATA) public data:any) { 
     this.id_user = data.id_user;
     this.avatarName = data.avatar_user;
     

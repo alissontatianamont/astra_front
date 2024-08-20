@@ -5,6 +5,8 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AdminLayoutRoutes } from "./admin-layout.routing";
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
+import { CarriersComponent } from "src/app/pages/carriers/carriers.component";
+import { ViewCarrierComponent } from "src/app/modal_views/view-carrier/view-carrier.component";
 import { UserComponent } from "../../pages/user/user.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { MatTableModule } from "@angular/material/table";
@@ -24,6 +26,7 @@ import { ReportsComponent } from "src/app/pages/reports/reports.component";
 import {MatDialogModule} from '@angular/material/dialog';
 import { CreateRoutesComponent } from "src/app/modal_forms/create-routes/create-routes.component";
 import {MatTabsModule} from '@angular/material/tabs';
+import { CreateCarriersComponent } from "src/app/modal_forms/create-carriers/create-carriers.component";
 import { ViewTravelComponent } from "src/app/modal_views/view-travel/view-travel.component";
 import { CreateEmployeesComponent } from "src/app/modal_forms/create-employees/create-employees.component";
 import { ViewEmployeeComponent } from "src/app/modal_views/view-employee/view-employee.component";
@@ -60,8 +63,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     UserComponent,
     EmployeesComponent,
     TravelsComponent,
+    CarriersComponent,
     ReportsComponent,
     CreateRoutesComponent,
+    ViewCarrierComponent,
+    CreateCarriersComponent,
     ViewTravelComponent,
     CreateEmployeesComponent,
     ViewEmployeeComponent,

@@ -25,4 +25,7 @@ export class RoutesService {
   editRoute(user: any, viaje_id): Observable<any>{
     return this.http.post(`${this.base_api}update_route/${viaje_id}`, user);
   }
+  deleteRoute(viaje_id: any): Observable<any>{
+    return this.http.post(`${this.base_api}delete_route/${viaje_id}`, viaje_id);
+  }
 }

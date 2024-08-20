@@ -1,6 +1,7 @@
 import { Component, Inject, Output, EventEmitter, OnInit  } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
+import { CarriersService } from 'src/app/services/carriers.service';
 import { RoutesService } from 'src/app/services/routes.service';
 import Swal from 'sweetalert2';
 
@@ -14,6 +15,7 @@ export interface RouteData {
   viaje_km_salida: string,
   viaje_km_llegada: string,
   fo_viaje_usuario: string,
+  fo_viaje_transportadora: string,
   viaje_planilla: string,
   viaje_flete: string,
   viaje_anticipo: string,
@@ -38,6 +40,7 @@ export class CreateRoutesComponent implements OnInit{
   userId : any;
   viaje_id: any; 
   drivers: any[] = [];
+  carriers: any[] = [];
   routes: RouteData = {
     viaje_num_manifiesto: '',
     viaje_fecha_manifiesto: new Date(),
@@ -48,6 +51,7 @@ export class CreateRoutesComponent implements OnInit{
     viaje_km_salida: '',
     viaje_km_llegada: '',
     fo_viaje_usuario: '',
+    fo_viaje_transportadora: '',
     viaje_planilla: '',
     viaje_flete: '',
     viaje_anticipo: '',
@@ -60,9 +64,9 @@ export class CreateRoutesComponent implements OnInit{
     viaje_estatus: ''
   };
   @Output() routeCreated = new EventEmitter<void>();
-  constructor(private routesService: RoutesService, private dialogRef: MatDialogRef<CreateRoutesComponent>,@Inject(MAT_DIALOG_DATA) public data:any, private authService: AuthService) {
+  constructor(private carriersService: CarriersService,private routesService: RoutesService, private dialogRef: MatDialogRef<CreateRoutesComponent>,@Inject(MAT_DIALOG_DATA) public data:any, private authService: AuthService) {
     this.userId = this.authService.getUserId();
-    console.log('Usuario ID:', this.userId);
+    // console.log('Usuario ID:', this.userId);
     if (data?.viaje_id) {
       this.viaje_id = data.viaje_id;
       console.log(this.viaje_id);
@@ -83,13 +87,19 @@ export class CreateRoutesComponent implements OnInit{
       this.drivers = data;
     });
   }
+  getCarriers(): void{
+    this.carriersService.getCarriers().subscribe((data:any)=>{
+      this.carriers = data;
+    })
+  }
   ngOnInit(): void {
     this.getUsers();
+    this.getCarriers();
     this.userId = this.authService.getUserId(); 
     this.routes.fo_viaje_usuario = this.userId;
+  
     if (this.viaje_id !== null) {
-      this.routesService.getRoute(this.viaje_id).subscribe((data:any)=>{
-        // console.log(data);
+      this.routesService.getRoute(this.viaje_id).subscribe((data: any) => {
         this.routes = {
           viaje_num_manifiesto: data.viaje_num_manifiesto,
           viaje_fecha_manifiesto: data.viaje_fecha_manifiesto,
@@ -100,6 +110,7 @@ export class CreateRoutesComponent implements OnInit{
           viaje_km_salida: data.viaje_km_salida,
           viaje_km_llegada: data.viaje_km_llegada,
           fo_viaje_usuario: data.fo_viaje_usuario,
+          fo_viaje_transportadora: data.fo_viaje_transportadora,
           viaje_planilla: data.viaje_planilla,
           viaje_flete: data.viaje_flete,
           viaje_anticipo: data.viaje_anticipo,
@@ -110,11 +121,13 @@ export class CreateRoutesComponent implements OnInit{
           viaje_observaciones: data.viaje_observaciones,
           viaje_peso: data.viaje_peso,
           viaje_estatus: data.viaje_estatus
-        }
+        };
+        this.routes.fo_viaje_usuario = data.fo_viaje_usuario;
+        this.routes.fo_viaje_transportadora = data.fo_viaje_transportadora;
       });
-      
     }
   }
+  
   OnSubmit(){
     //fecha manifiesto
     let fecha_manifiesto = new Date(this.routes.viaje_fecha_manifiesto);
@@ -126,10 +139,8 @@ export class CreateRoutesComponent implements OnInit{
     let fechaFormateada_inicio = formatoFecha_inicio.format(fecha_inicio);
     this.formData = new FormData();
     if (this.file_planilla == null ) {
-     // console.log("sin: "+this.file_routes);
       this.formData.append('viaje_planilla', this.routes.viaje_planilla);
     } else {
-      // console.log("con: "+this.file_routes);
       this.formData.append('viaje_planilla', this.file_planilla, this.file_planilla.name);
 
     }
@@ -137,6 +148,7 @@ export class CreateRoutesComponent implements OnInit{
     this.formData.append("viaje_fecha_manifiesto", fechaFormateada_manifiesto);
     this.formData.append("viaje_placa", this.routes.viaje_placa);
     this.formData.append("fo_viaje_usuario", this.routes.fo_viaje_usuario);
+    this.formData.append("fo_viaje_transportadora", this.routes.fo_viaje_transportadora);
     this.formData.append("viaje_destino_inicio", this.routes.viaje_destino_inicio);
     this.formData.append("viaje_destino_llegada", this.routes.viaje_destino_llegada);
     this.formData.append("viaje_fecha_inicio",  fechaFormateada_inicio);
@@ -145,7 +157,12 @@ export class CreateRoutesComponent implements OnInit{
     this.formData.append("viaje_flete",this.routes.viaje_flete );
     this.formData.append("viaje_anticipo",this.routes.viaje_anticipo );
     this.formData.append("viaje_neto_pago",this.routes.viaje_neto_pago );
-    this.formData.append("viaje_sobrecosto",this.routes.viaje_sobrecosto );
+    if(this.routes.viaje_sobrecosto !== undefined){
+      this.formData.append("viaje_sobrecosto",this.routes.viaje_sobrecosto );
+    }else{
+      this.formData.append("viaje_sobrecosto",0 );
+    }
+    
     this.formData.append("viaje_total_ganancias",this.routes.viaje_total_ganancias );
     this.formData.append("viaje_porcentaje_conductor",this.routes.viaje_porcentaje_conductor );
     this.formData.append("viaje_observaciones",this.routes.viaje_observaciones );

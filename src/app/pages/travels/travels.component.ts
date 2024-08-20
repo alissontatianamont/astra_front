@@ -7,7 +7,7 @@ import { CreateRoutesComponent } from 'src/app/modal_forms/create-routes/create-
 import { MatDialog } from '@angular/material/dialog';
 import { ViewTravelComponent } from 'src/app/modal_views/view-travel/view-travel.component';
 import { RoutesService } from 'src/app/services/routes.service';
-
+import Swal from 'sweetalert2';
 export interface RoutesData {
   viaje_id: number;
   fo_viaje_usuario: string;
@@ -48,19 +48,53 @@ export class TravelsComponent implements OnInit {
       this.loadData();
     });
   }
-editRoute(viaje_id: number){
-  const dialogRef = this.dialog.open(CreateRoutesComponent,{
-    data:{viaje_id:viaje_id}
-  });
-}
+  editRoute(viaje_id: number){
+    const dialogRef = this.dialog.open(CreateRoutesComponent,{
+      data:{viaje_id:viaje_id}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.loadData();
+    });
+  }
   openView() {
     const dialogView = this.dialog.open(ViewTravelComponent);
 
     dialogView.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      console.log(`Dialog resulttt: ${result}`);
+      this.loadData();
     });
   }
+  deleteRoute(viaje_id: number){
+    Swal.fire({
+      text: "¿Seguro desea eliminar este viaje?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "si, eliminar",
+      cancelButtonText: "cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.routesService.deleteRoute(viaje_id).subscribe({
+          next:(response)=>{
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Ruta eliminada con éxito",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          },
+          error:(error)=>{
+            console.error('bad',error);
+          },
+        }); 
+      }
+      this.loadData();
+    });
 
+  }
   loadData() {
     this.routesService.getRoutes().subscribe((data:any)=>{
       // console.log(data);

@@ -65,8 +65,7 @@
               {{ driver.nombre_usuario }}
             </mat-option>
           </mat-select>
-        </mat-form-field>
-        
+        </mat-form-field>        
         <mat-form-field [hidden]="false">
           <input name="fo_viaje_usuario_hidden" [(ngModel)]="routes.fo_viaje_usuario"   matInput>
         </mat-form-field>
@@ -74,11 +73,22 @@
       
     </div>
     <div class="row">
-      <div class="col-12">
+      <div class="col-md-6 col-12">
         <mat-form-field class="w-100">
           <mat-label>Subir planillas</mat-label>
           <input name="viaje_planilla" matInput type="file" (change)="getFile($event)" placeholder="Subir planillas" accept="image/*,.pdf">
         </mat-form-field>        
+      </div>
+      <div class="col-md-6 col-12">
+          <mat-form-field class="w-100">
+            <mat-label>asignar transportadora</mat-label>
+            <mat-select name="fo_viaje_transportadora" [(ngModel)]="routes.fo_viaje_transportadora">
+              <mat-option *ngFor="let carrier of carriers" [value]="carrier.transportadora_id">
+                {{ carrier.transportadora_razon_social  }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
       </div>
     </div>
     <div class="row">
