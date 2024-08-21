@@ -17,7 +17,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { LoginComponent } from './pages/login/login.component';
-import { ExogenousComponent } from './pages/exogenous/exogenous.component';
+
 
 
 @NgModule({
@@ -35,7 +35,7 @@ import { ExogenousComponent } from './pages/exogenous/exogenous.component';
     MatInputModule,
     MatFormFieldModule,
   ],
-  declarations: [AppComponent, AdminLayoutComponent, LoginComponent, ExogenousComponent],
+  declarations: [AppComponent, AdminLayoutComponent, LoginComponent],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],

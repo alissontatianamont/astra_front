@@ -1,1 +1,78 @@
-<p>exogenous works!</p>
+<div class=" content">
+    <div class=" row">
+        <div class="col-12 col-md-3">
+            <div class=" card card-chart d-flex justify-content-center align-items-center">
+                <h1 class="text-white mb-0 pt-2 pb-3">Empresas exógenas</h1>
+            </div>
+        </div>
+    </div>
+    <mat-form-field>
+        <mat-label class="custom-label">Buscar empresas exógenas</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input class="custom-input">
+    </mat-form-field>
+    <div class="mat-elevation-z8">
+        <div id="table-content">
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="exogena_id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+              <td mat-cell *matCellDef="let row"> {{row.exogena_id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="exogena_tipo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de empresa </th>
+                <td mat-cell *matCellDef="let row"> {{row.exogena_tipo == 1 ? 'Empresa' : 'Persona Natural' }} </td>
+              </ng-container>
+            <ng-container matColumnDef="exogena_razon_social_nombre">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Razón social /nombre</th>
+              <td mat-cell *matCellDef="let row"> 
+                {{ getDisplayName(row) }}
+              </td>
+              
+              
+            </ng-container>
+            <ng-container matColumnDef="exogena_nit">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nit </th>
+              <td mat-cell *matCellDef="let row"> {{row.exogena_nit  }} - {{row.exogena_dv}} </td>
+            </ng-container>
+            <ng-container matColumnDef="exogena_direccion">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Dirección </th>
+              <td mat-cell *matCellDef="let row"> {{row.exogena_direccion}} </td>
+            </ng-container>
+            <ng-container matColumnDef="exogena_ciudad">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Ciudad </th>
+              <td mat-cell *matCellDef="let row"> {{row.exogena_ciudad}} </td>
+            </ng-container>
+            <ng-container matColumnDef="exogena_departamento">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Departamento </th>
+              <td mat-cell *matCellDef="let row"> {{ row.exogena_departamento }}  </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+              <td mat-cell *matCellDef="let row">
+                <button class=" btn btn-dropdown" mat-button [matMenuTriggerFor]="menu">Acciones <i
+                    class="fa-solid fa-sort-down"></i></button>
+                <mat-menu #menu="matMenu" class="dropdown-content">
+                  <button mat-menu-item (click)="editExogenous(row.exogena_id)">Editar</button>
+                  <button mat-menu-item (click)="viewExogenous(row.exogena_id)">Ver detalles </button>
+                  <button mat-menu-item (click)="deleteExogenous(row.exogena_id)">Eliminar</button>
+                </mat-menu>
+              </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No hay coincidencias con: "{{input.value}}"</td>
+            </tr>
+          </table>
+        </div>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        <div class="col-12 d-flex justify-content-center align-items-center">
+          <button mat-button class=" btn btn-danger btn-block" (click)="openDialog()">Crear nueva empresa exógena <b>+</b></button>
+        </div>
+      </div>
+</div>

@@ -7,6 +7,7 @@ import { AdminLayoutRoutes } from "./admin-layout.routing";
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
 import { CarriersComponent } from "src/app/pages/carriers/carriers.component";
 import { ViewCarrierComponent } from "src/app/modal_views/view-carrier/view-carrier.component";
+import { ExogenousComponent } from "src/app/pages/exogenous/exogenous.component";
 import { UserComponent } from "../../pages/user/user.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { MatTableModule } from "@angular/material/table";
@@ -20,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSortModule } from "@angular/material/sort";
 import { TravelsComponent } from "src/app/pages/travels/travels.component";
 import { EmployeesComponent } from "src/app/pages/employees/employees.component";
+import { ViewExogenousComponent } from "src/app/modal_views/view-exogenous/view-exogenous.component";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { ReportsComponent } from "src/app/pages/reports/reports.component";
@@ -30,6 +32,7 @@ import { CreateCarriersComponent } from "src/app/modal_forms/create-carriers/cre
 import { ViewTravelComponent } from "src/app/modal_views/view-travel/view-travel.component";
 import { CreateEmployeesComponent } from "src/app/modal_forms/create-employees/create-employees.component";
 import { ViewEmployeeComponent } from "src/app/modal_views/view-employee/view-employee.component";
+import { CreateExogenousComponent } from "src/app/modal_forms/create-exogenous/create-exogenous.component";
 import { CertificationsComponent } from "src/app/pages/certifications/certifications.component";
 import { CKEditorModule } from 'ckeditor4-angular';
 import { AuthInterceptor } from "../../auth.interceptor";
@@ -64,10 +67,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     EmployeesComponent,
     TravelsComponent,
     CarriersComponent,
+    ExogenousComponent,
     ReportsComponent,
     CreateRoutesComponent,
     ViewCarrierComponent,
+    ViewExogenousComponent,
     CreateCarriersComponent,
+    CreateExogenousComponent,
     ViewTravelComponent,
     CreateEmployeesComponent,
     ViewEmployeeComponent,

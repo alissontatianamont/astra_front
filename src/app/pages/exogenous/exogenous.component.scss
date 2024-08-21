@@ -1,0 +1,64 @@
+.mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .mat-select-value {
+    color: rgba(255, 255, 255, 0.87) !important;
+  }
+  
+  .mat-paginator {
+    background: #27293d;
+    color: #fff !important;
+  
+  
+  }
+  
+  .custom-label {
+    color: white;
+  }
+  
+  .custom-input {
+    color: white;
+  
+    &::placeholder {
+      color: white;
+    }
+  }
+  
+  .mat-focus-indicator.mat-tooltip-trigger.mat-paginator-navigation-previous.mat-icon-button.mat-button-base.cdk-focused.cdk-mouse-focused.mat-button-disabled {
+    color: #ffffff91 !important;
+  }
+  
+  table {
+    background: #27293d;
+    width: 100%;
+  
+    .mat-mdc-form-field {
+      font-size: 14px;
+      width: 100%;
+    }
+  
+    td,
+    th {
+      width: 10%;
+      color: #fff;
+    }
+  
+    .btn-dropdown {
+      background: linear-gradient(0deg, #ec250d 0%, #fd5d93 100%);
+      min-width: 178px;
+    }
+  
+    .dropdown-content {
+      min-width: 175px !important;
+    }
+  
+    .fa-solid.fa-sort-down {
+      margin-top: -10px;
+    }
+  
+  }
+  

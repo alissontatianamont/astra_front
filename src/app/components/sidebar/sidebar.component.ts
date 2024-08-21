@@ -20,6 +20,12 @@ export const ROUTES: RouteInfo[] = [
     class: ""
   },
   {
+    path: "/exogenous",
+    title: "Empresas exógenas",
+    icon: "icon-square-pin",
+    class: ""
+  },
+  {
     path: "/carriers",
     title: "Transportadoras",
     icon: "icon-square-pin",

@@ -1,0 +1,48 @@
+<h2 class="text-center mt-3" mat-dialog-title>Detalles Exógena</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="container-fluid">
+        <div class="row pl-md-5 pr-md-5">
+            <div class="col-md-6 col-12">
+                <ul class=" list-unstyled text-white">
+                    <li>
+                        <h3> <strong>Tipo </strong></h3>
+                        <p class="data-modal">{{exogenous_data.exogena_tipo == 1 ? 'Empresa' : 'Persona Natural' }}</p>
+                    </li>
+                    <li *ngIf="exogenous_data.exogena_tipo === 1">
+                        <h3> <strong>Razón social </strong></h3>
+                        <p class="data-modal">{{ exogenous_data.exogena_razon_social }}</p>
+                    </li>
+                    <li *ngIf="exogenous_data.exogena_tipo === 2">
+                        <h3> <strong>Nombre </strong></h3>
+                        <p class="data-modal">{{ getDisplayName(exogenous_data) }}</p>
+                    </li>
+                    <li>
+                        <h3> <strong>Dirección</strong> </h3>
+                        <p class="data-modal">{{ exogenous_data.exogena_direccion }}</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-12">
+                <ul class=" list-unstyled text-white">
+                    <li>
+                        <h3> <strong>Ciudad</strong></h3>
+                        <p class="data-modal">{{ exogenous_data.exogena_ciudad }}</p>
+                    </li>
+                    <li>
+                        <h3> <strong>departamento</strong></h3>
+                        <p class="data-modal">{{ exogenous_data.exogena_departamento }}</p>
+                    </li>
+                    <li>
+                        <h3> <strong>Nit</strong></h3>
+                        <p class="data-modal">{{ exogenous_data.exogena_nit }} - {{ exogenous_data.exogena_dv}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close class="btn-modal">Cerrar</button>
+</mat-dialog-actions>
