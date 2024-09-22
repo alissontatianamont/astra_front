@@ -67,4 +67,9 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('accessToken');
   }
+  updateProfile(user: any, $id): Observable<any> {
+    console.log("entra a update");
+    
+    return this.http.post(`${this.base_api}update_profile/${$id}`,user);
+  }  
 }

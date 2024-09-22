@@ -20,7 +20,10 @@ login(){
     response =>{
       localStorage.setItem('accessToken', response.accessToken);
       localStorage.setItem('usuario_id', response.user.usuario_id.toString());
-      console.log( response);
+      localStorage.setItem('rol', response.user.rol.toString());
+      // console.log('rol usuario: ', localStorage.getItem('rol'));
+      
+      // console.log( response);
       
       this.router.navigate(['/dashboard']);
     },

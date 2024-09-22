@@ -44,8 +44,8 @@ export const ROUTES: RouteInfo[] = [
   },
 
   {
-    path: "/certifications",
-    title: "Certificados",
+    path: "/user",
+    title: "Mi perfil",
     icon: "icon-badge",
     class: ""
   },
