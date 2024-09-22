@@ -7,7 +7,9 @@ import { CreateRoutesComponent } from 'src/app/modal_forms/create-routes/create-
 import { MatDialog } from '@angular/material/dialog';
 import { ViewTravelComponent } from 'src/app/modal_views/view-travel/view-travel.component';
 import { RoutesService } from 'src/app/services/routes.service';
+import { CreateEgressComponent } from 'src/app/modal_forms/create-egress/create-egress.component';
 import Swal from 'sweetalert2';
+import { ViewEgressComponent } from 'src/app/modal_views/view-egress/view-egress.component';
 export interface RoutesData {
   viaje_id: number;
   fo_viaje_usuario: string;
@@ -57,8 +59,19 @@ export class TravelsComponent implements OnInit {
       this.loadData();
     });
   }
-  openView() {
-    const dialogView = this.dialog.open(ViewTravelComponent);
+  viewEgress(viaje_id: number){
+    const dialogRef = this.dialog.open(ViewEgressComponent,{
+      data:{viaje_id:viaje_id}
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadData();  // Recargar la tabla
+    });
+    
+  }
+  ViewRoute(viaje_id: number) {
+    const dialogView = this.dialog.open(ViewTravelComponent,{
+     data: {route_id:viaje_id}
+    });
 
     dialogView.afterClosed().subscribe(result => {
       console.log(`Dialog resulttt: ${result}`);
@@ -67,7 +80,7 @@ export class TravelsComponent implements OnInit {
   }
   deleteRoute(viaje_id: number){
     Swal.fire({
-      text: "¿Seguro desea eliminar este viaje?",
+      html: "<h3 class='text-dark'>¿Seguro desea eliminar este viaje?</h3><small>Todos los datos asociados a este viaje se perderán</small>",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -94,6 +107,30 @@ export class TravelsComponent implements OnInit {
       this.loadData();
     });
 
+  }
+  finishRoute(viaje_id: number){
+    this.routesService.finishRoute(viaje_id).subscribe({
+      next:(response)=>{
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Viaje finalizado con éxito",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      },
+      error:(error)=>{
+        console.error('bad',error);
+      },
+    });
+  }
+  createEgress(viaje_id: number){
+    const dialogView = this.dialog.open(CreateEgressComponent,{
+      data:{viaje_id:viaje_id}
+    });
+    dialogView.afterClosed().subscribe(result => {
+      this.loadData();
+    });
   }
   loadData() {
     this.routesService.getRoutes().subscribe((data:any)=>{

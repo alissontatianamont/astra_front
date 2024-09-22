@@ -1,8 +1,85 @@
 <h2 mat-dialog-title>Todo sobre este viaje</h2>
 <mat-dialog-content class="mat-typography ">
   <div class="container-fluid">
-    <p>Información viaje</p>
-   </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Placa</h4>
+        <p>{{route_data.viaje_placa}}</p>
+      </div>
+      <div class="col-md-6">
+        <h4>Conductor</h4>
+        <p>{{driver_name}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Número manifiesto</h4>
+        <p>{{route_data.viaje_num_manifiesto }}</p>
+      </div>
+      
+      <div class="col-md-6">
+        <h4>Fecha manifiesto</h4>
+        <p>{{route_data.viaje_fecha_manifiesto}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Ruta</h4>
+        <p>{{route_data.viaje_destino_inicio + ' - ' + route_data.viaje_destino_llegada}}</p>
+      </div>
+      <div class="col-md-6">
+        <h4>Fecha de salida</h4>
+        <p>{{route_data.viaje_fecha_inicio}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Fecha de llegada</h4>
+        <p>{{(route_data.viaje_fecha_llegada !== null && route_data.viaje_fecha_llegada !== '') ? route_data.viaje_fecha_llegada : 'en curso'}}</p>
+      </div>
+      <div class="col-md-6">
+        <h4>Flete</h4>
+        <p>{{route_data.viaje_flete || 0 | currency:'':'symbol':'1.0-0'}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Neto a pagar</h4>
+        <p>{{route_data.viaje_neto_pago || 0 | currency:'':'symbol':'1.0-0'}}</p>
+      </div>
+      <div class="col-md-6">
+        <h4>Anticipo</h4>
+        <p>{{route_data.viaje_anticipo || 0 | currency:'':'symbol':'1.0-0'}}</p>
+   
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Porcentaje conductor</h4>
+        <p>{{route_data.viaje_porcentaje_conductor || 0 | currency:'':'symbol':'1.0-0'}}</p>
+      </div>
+      <div class="col-md-6">
+        <h4>Sobre costo (si hay)</h4>
+        <p>{{route_data.viaje_sobrecosto || 0 | currency:'':'symbol':'1.0-0'}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Ganancias</h4>
+        <p>{{route_data.viaje_total_ganancias || 0 | currency:'':'symbol':'1.0-0'}}</p>
+      </div>
+      <div class="col-md-6">
+        <h4>Total de gastos</h4>
+        <p>{{route_data.viaje_total_gastos || 0 | currency:'':'symbol':'1.0-0'}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <button mat-button class=" btn btn-danger btn-block" (click)="downloadSpreadsheet(route_data.viaje_planilla)" >Obtener manifiesto</button>
+      </div>
+    </div>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close class="btn-modal">Cerrar</button>

@@ -9,13 +9,17 @@ import { CarriersComponent } from "src/app/pages/carriers/carriers.component";
 import { ViewCarrierComponent } from "src/app/modal_views/view-carrier/view-carrier.component";
 import { ExogenousComponent } from "src/app/pages/exogenous/exogenous.component";
 import { UserComponent } from "../../pages/user/user.component";
+import { CreateEgressComponent } from "src/app/modal_forms/create-egress/create-egress.component";
+import { ViewEgressComponent } from "src/app/modal_views/view-egress/view-egress.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from '@angular/material/icon';
 import { MatSortModule } from "@angular/material/sort";
@@ -48,7 +52,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
+    MatCheckboxModule,
     MatInputModule,
+    MatExpansionModule,
     MatIconModule,
     MatSortModule, 
     MatMenuModule,
@@ -70,6 +76,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ExogenousComponent,
     ReportsComponent,
     CreateRoutesComponent,
+    ViewEgressComponent,
     ViewCarrierComponent,
     ViewExogenousComponent,
     CreateCarriersComponent,
@@ -77,7 +84,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ViewTravelComponent,
     CreateEmployeesComponent,
     ViewEmployeeComponent,
-    CertificationsComponent
+    CertificationsComponent,
+    CreateEgressComponent
   ],
   // exports: [CreateRoutesComponent],
   providers: [AuthService,

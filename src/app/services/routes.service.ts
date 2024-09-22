@@ -28,4 +28,14 @@ export class RoutesService {
   deleteRoute(viaje_id: any): Observable<any>{
     return this.http.post(`${this.base_api}delete_route/${viaje_id}`, viaje_id);
   }
+  downloadSpreadsheet(file_name: string) {
+    return this.http.get(`${this.base_api}download_spreadsheet/${file_name}`, { responseType: 'blob' });
+  }
+  getDriverName(user_id){
+    return this.http.get(`${this.base_api}get_driver_name/${user_id}`);
+  }
+  finishRoute(viaje_id: any): Observable<any>{
+    return this.http.post(`${this.base_api}finish_route/${viaje_id}`, viaje_id);
+  }
+  
 }

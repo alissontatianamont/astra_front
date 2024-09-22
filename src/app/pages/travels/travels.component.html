@@ -33,23 +33,23 @@
             </ng-container>
             <ng-container matColumnDef="viaje_flete">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Flete </th>
-              <td mat-cell *matCellDef="let row"> {{row.viaje_flete || 0 | currency}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.viaje_flete || 0 | currency:'':'symbol':'1.0-0' }} </td>
             </ng-container>
             <ng-container matColumnDef="viaje_neto_pago">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Neto a pagar </th>
-              <td mat-cell *matCellDef="let row"> {{row.viaje_neto_pago || 0 | currency}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.viaje_neto_pago || 0 | currency:'':'symbol':'1.0-0' }} </td>
             </ng-container>
             <ng-container matColumnDef="viaje_anticipo">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Anticipo </th>
-              <td mat-cell *matCellDef="let row"> {{row.viaje_anticipo || 0 | currency}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.viaje_anticipo || 0 | currency:'':'symbol':'1.0-0' }} </td>
             </ng-container>
             <ng-container matColumnDef="viaje_total_gastos">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Total gastos </th>
-              <td mat-cell *matCellDef="let row"> {{ row.viaje_total_gastos || 0 | currency }}  </td>
+              <td mat-cell *matCellDef="let row"> {{ row.viaje_total_gastos || 0 | currency:'':'symbol':'1.0-0'  }}  </td>
             </ng-container>
             <ng-container matColumnDef="viaje_total_ganancias">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Total ganancias </th>
-              <td mat-cell *matCellDef="let row"> {{row.viaje_total_ganancias || 0 | currency}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.viaje_total_ganancias || 0 | currency:'':'symbol':'1.0-0' }} </td>
             </ng-container>
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
@@ -58,9 +58,10 @@
                     class="fa-solid fa-sort-down"></i></button>
                 <mat-menu #menu="matMenu" class="dropdown-content">
                   <button mat-menu-item (click)="editRoute(row.viaje_id)">Editar</button>
-                  <button mat-menu-item (click)="openView()">Ver detalles de viaje</button>
-                  <button mat-menu-item (click)="openView()">Añadir nuevo gasto</button>
-                  <button mat-menu-item (click)="openView()">Finalizar ruta</button>
+                  <button mat-menu-item (click)="ViewRoute(row.viaje_id)">Ver detalles de viaje</button>
+                  <button mat-menu-item (click)="viewEgress(row.viaje_id)">Ver gastos</button>
+                  <button mat-menu-item (click)="createEgress(row.viaje_id)">Añadir nuevo gasto</button>
+                  <button mat-menu-item (click)="finishRoute(row.viaje_id)">Finalizar ruta</button>
                   <button mat-menu-item (click)="deleteRoute(row.viaje_id)">Eliminar ruta de viaje</button>
                 </mat-menu>
               </td>

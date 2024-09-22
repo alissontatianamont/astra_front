@@ -1,0 +1,102 @@
+<h2 class="text-center mt-3" mat-dialog-title>Detalles Gastos</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container-fluid">
+    <mat-tab-group>
+      <!-- Pestaña de Egresos Globales -->
+      <mat-tab label="Egresos Globales">
+        <ng-container *ngIf="globalEgressDescription.length > 0">
+          <div class="mt-3" *ngFor="let group of globalEgressDescription; let i = index">
+            <mat-accordion>
+              <mat-expansion-panel class="btn px-1" hideToggle (opened)="panelOpenState[i] = true"
+                (closed)="panelOpenState[i] = false">
+
+                <mat-expansion-panel-header class="p-0">
+                  <mat-panel-title class="text-white w-100 mr-0">
+                    <div class="row w-100">
+                      <div class="col-md-3 d-flex justify-content-center align-items-center">
+                        {{ group.gasto_g_descripcion }}
+                      </div>
+                      <div class="col-md-4 d-flex justify-content-center align-items-center">
+                        {{ group.gasto_g_valor || 0 | currency: '' : 'symbol' : '1.0-0' }}
+                      </div>
+                      <div class="col-md-5 d-flex justify-content-center" style="gap: 15px;">
+                        <button (click)="$event.stopPropagation();editEgressGlobal(group.gasto_g_id, route_id, 1);" class="text-white btn btns-dropdown btn-danger">
+                          <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button (click)="$event.stopPropagation();deleteGlobalEgress(group.gasto_g_id)" class="text-white btn btns-dropdown btn-danger">
+                          <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                        <!-- Ícono de flecha que cambia según el estado del panel -->
+                        <button class="cursor-pointer text-white btns-dropdown bg-transparent border-0">
+                          <i class="fa" [ngClass]="panelOpenState[i] ? 'fa-solid fa-angle-up' : 'fa-solid fa-angle-down'"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <!-- Tabla con los egresos del grupo -->
+                <div *ngIf="group.desglose_gastos.length > 0">
+                  <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                      <tr>
+                        <th>Proveedor</th>
+                        <th>Subdescripción</th>
+                        <th>Valor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let egreso of group.desglose_gastos">
+                        <td>{{ egreso.fo_egreso_proveedor == null || egreso.fo_egreso_proveedor == '' ? 'No exogenable' :  egreso.nombre_razon_social }}</td>
+                        <td>{{ egreso.egreso_descripcion === '' ? 'No aplica' : egreso.egreso_descripcion }}</td>
+                        <td>{{ egreso.egreso_valor || 0 | currency: '' : 'symbol' : '1.0-0' }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div *ngIf="group.desglose_gastos.length === 0">
+                  <p>No hay desgloses de gastos disponibles.</p>
+                </div>
+
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="globalEgressDescription.length === 0">
+          <p class="text-white">No hay egresos globales disponibles.</p>
+        </ng-container>
+      </mat-tab>
+
+      
+      <!-- Pestaña de Egresos Individuales -->
+      <mat-tab label="Egresos Individuales">
+        <ng-container *ngIf="individualEgress.length > 0">
+          <div *ngFor="let egreso of individualEgress" class="mt-3 btn w-100">
+            <div class="row w-100">
+              <div class="col-4 d-flex align-items-center justify-content-center">
+                {{ egreso.egreso_descripcion ? egreso.egreso_descripcion : 'No aplica' }}
+              </div>
+              <div class="col-4 d-flex align-items-center justify-content-center">
+                {{ egreso.egreso_valor || 0 | currency: '' : 'symbol' : '1.0-0' }}
+              </div>
+              <div class="col-4 d-flex justify-content-center" style="gap: 15px;">
+                <button (click)="$event.stopPropagation(); editSingleEgress(egreso.egreso_id, route_id, 0);" class="text-white btn btns-dropdown btn-danger">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button (click)="$event.stopPropagation(); deleteSingleEgress(egreso.egreso_id, route_id)" class="text-white btn btns-dropdown btn-danger">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </div>          
+          </div>
+        </ng-container>
+        <ng-container *ngIf="individualEgress.length === 0">
+          <p>No hay egresos individuales disponibles.</p>
+        </ng-container>
+      </mat-tab>
+      
+    </mat-tab-group>
+  </div>
+</mat-dialog-content>

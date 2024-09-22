@@ -1,0 +1,157 @@
+<h2 mat-dialog-title *ngIf="egress_id == undefined">Generar nuevo gasto <span *ngIf="globalEgressData.gasto_global === 1">Global</span> <span
+    *ngIf="globalEgressData.gasto_global === 0">Único</span></h2>
+<h2 mat-dialog-title *ngIf="egress_id !== undefined">Editar gasto <span *ngIf="globalEgressData.gasto_global === 1">Global</span> <span
+    *ngIf="globalEgressData.gasto_global === 0">Único</span></h2>
+<form (ngSubmit)="OnSubmit()" #userForm="ngForm">
+  <mat-dialog-content class="mat-typography">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <div >
+
+          </div>
+          <mat-form-field class="w-100" *ngIf="egress_id == undefined">
+            <mat-label>Gasto global</mat-label>
+            <mat-select (selectionChange)="onSelectionChange($event, this.globalEgressData.gasto_global)"
+              [(ngModel)]='globalEgressData.gasto_global' name="global">
+              <mat-option [value]="1">Si</mat-option>
+              <mat-option [value]="0">No</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row" *ngIf="globalEgressData.gasto_global === 1  || globalEgressData.gasto_global == null">
+        <div class="col-6">
+          <mat-form-field class="w-100">
+            <mat-label>Descripción</mat-label>
+            <input matInput [(ngModel)]='globalEgressData.gasto_descripcion' name="gasto_descripcion">
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="w-100">
+            <mat-label>Coste final</mat-label>
+            <input matInput [(ngModel)]='globalEgressData.gasto_valor' name="coste_final"
+              (input)="formatCurrency($event)">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="globalEgressData.gasto_global === 0">
+        <div
+          [ngClass]="{'col-3': breakdownEgressData.egreso_exogenable === 1, 'col-4': breakdownEgressData.egreso_exogenable !== 1}">
+          <mat-form-field class="w-100">
+            <mat-label>Gasto exogenable</mat-label>
+            <mat-select (selectionChange)="onSelectionChange($event, this.breakdownEgressData.egreso_exogenable);clearExogenousFields($event, breakdownEgressData)"
+              [(ngModel)]='breakdownEgressData.egreso_exogenable' name="egreso_exogenable">
+              <mat-option [value]="1">Si</mat-option>
+              <mat-option [value]="2">No</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div
+          [ngClass]="{'col-3': breakdownEgressData.egreso_exogenable === 1, 'col-4': breakdownEgressData.egreso_exogenable !== 1}"
+          *ngIf="breakdownEgressData.egreso_exogenable === 1">
+          <mat-form-field class="w-100">
+            <mat-label>Empresa exogena</mat-label>
+            <mat-select [(ngModel)]='breakdownEgressData.fo_egreso_proveedor' name="fo_egreso_proveedor">
+              <mat-option *ngFor="let exogen of exogenous" [value]="exogen.exogena_id">
+                {{ getDisplayName(exogen) }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div
+          [ngClass]="{'col-3': breakdownEgressData.egreso_exogenable === 1, 'col-4': breakdownEgressData.egreso_exogenable !== 1}">
+          <mat-form-field class="w-100">
+            <mat-label>Descripción</mat-label>
+            <input matInput [(ngModel)]='breakdownEgressData.egreso_descripcion' name="egreso_descripcion">
+          </mat-form-field>
+        </div>
+
+        <div
+          [ngClass]="{'col-3': breakdownEgressData.egreso_exogenable === 1, 'col-4': breakdownEgressData.egreso_exogenable !== 1}">
+          <mat-form-field class="w-100">
+            <mat-label>Coste final</mat-label>
+            <input matInput [(ngModel)]='breakdownEgressData.egreso_valor' (input)="formatCurrency($event)"
+              name="egreso_valor">
+          </mat-form-field>
+        </div>
+
+      </div>
+    </div>
+    <div class="row" *ngIf="globalEgressData.gasto_global === 1">
+      <div class="col-12">
+        <mat-checkbox [(ngModel)]="habilitarDetalle" aria-colcount="white" name="habilitarDetalle">Habilitar
+          detalle</mat-checkbox>
+      </div>
+    </div>
+    <div *ngIf="habilitarDetalle === true && globalEgressData.gasto_global === 1" class="container-fluid">
+      <div>
+        <h3 class="mt-4">Detalles de Gasto</h3>
+      </div>
+      <div *ngFor="let item of egressItems; let i = index" class="row">
+        <div [ngClass]="{'col-3': item.egreso_exogenable === 1, 'col-4': item.egreso_exogenable !== 1}">
+          <mat-form-field class="w-100">
+            <mat-label>Gasto exogenable</mat-label>
+            <mat-select (selectionChange)="onSelectionChange($event, item.egreso_exogenable);clearExogenousFields($event,item)"
+              [(ngModel)]='item.egreso_exogenable' name="egreso_exogenable_{{i}}">
+              <mat-option [value]="1">Si</mat-option>
+              <mat-option [value]="2">No</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div [ngClass]="{'col-3': item.egreso_exogenable === 1, 'col-4': item.egreso_exogenable !== 1}"
+          *ngIf="item.egreso_exogenable === 1">
+          <mat-form-field class="w-100">
+            <mat-label>Empresa exogena</mat-label>
+            <mat-select [(ngModel)]='item.fo_egreso_proveedor' name="fo_egreso_proveedor_{{i}}">
+              <mat-option *ngFor="let exogen of exogenous" [value]="exogen.exogena_id">
+                {{ getDisplayName(exogen) }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div [ngClass]="{'col-3': item.egreso_exogenable === 1, 'col-4': item.egreso_exogenable !== 1}">
+          <mat-form-field class="w-100">
+            <mat-label>Descripción</mat-label>
+            <input matInput [(ngModel)]='item.gasto_descripcion' name="gasto_descripcion_{{i}}">
+          </mat-form-field>
+        </div>
+        <div [ngClass]="{'col-3 d-flex': item.egreso_exogenable === 1, 'col-4 d-flex': item.egreso_exogenable !== 1}">
+          <mat-form-field>
+            <mat-label>Valor gasto</mat-label>
+            <input matInput [(ngModel)]='item.gasto_valor' name="coste_final_{{i}}"
+              (ngModelChange)="updateCost(i, $event)" (keyup)="formatCurrency($event)">
+          </mat-form-field>
+          <!-- Botón para eliminar la fila, excepto la primera -->
+          <button type="button" *ngIf="item.egreso_id !== null" mat-icon-button color="warn" (click)="deleteEgressItem(item.egreso_id, i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button type="button" *ngIf="i > 0 && (item.egreso_id == undefined || item.egreso_id == null)" mat-icon-button color="warn" (click)="removeRow(i)">
+            <mat-icon>close</mat-icon>
+          </button>
+          
+        </div>
+      </div>
+
+      <!-- Botón para añadir una nueva fila -->
+      <div class="text-center mt-4">
+        <button type="button" mat-raised-button color="primary" (click)="addRow()">Añadir nuevo</button>
+      </div>
+
+      <div>
+        <mat-form-field class="w-100">
+          <mat-label>Total desgloce gastos</mat-label>
+          <input matInput [value]="totalCost | currency:'':'':'0.0-0'" readonly>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <button mat-button type="submit">Guardar</button>
+  </mat-dialog-content>
+</form>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="btn-modal">Cerrar</button>
+</mat-dialog-actions>

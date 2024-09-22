@@ -26,4 +26,7 @@ export class ExogenousService {
   deleteExogenous(exogenous_id: any) : Observable <any>{
     return this.http.post(`${this.base_api}delete_exogenous/${exogenous_id}`,exogenous_id);
   }
+  getExogenousSelect(){
+    return this.http.get(`${this.base_api}get_exogenous_select`);
+  }
 }

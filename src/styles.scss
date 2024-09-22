@@ -89,8 +89,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
   .mat-menu-panel {
     min-width: 177px;
   }
-  .mat-input-element{
+  .mat-input-element, .mat-checkbox-label{
     color: #fff !important;
+  }
+  .mat-checkbox.mat-accent .mat-checkbox-frame {
+    border-color: #fff !important;
   }
   .mat-form-field-empty.mat-form-field-label, .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
     display: block;
@@ -101,6 +104,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
   .mat-icon-button, .mat-stroked-button {
     color: #fff;
     font-size: 25px !important;
+  }
+  .mat-tab-body-content {
+    overflow: inherit !important;
+  }
+  .mat-background-general{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px !important;
+    background: #27293d !important;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .btns-dropdown{
+    padding: 10px !important;
+  }
+  .cursor-pointer{
+    cursor: pointer;
   }
   .mat-dialog-container {
     min-width: 42vw;

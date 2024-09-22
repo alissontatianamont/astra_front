@@ -81,11 +81,11 @@ export class CreateExogenousComponent implements OnInit {
     this.formData = new FormData();
     this.formData.append('exogena_nit', this.exogenous_data.exogena_nit);
     this.formData.append('exogena_dv', this.exogenous_data.exogena_dv);
-    this.formData.append('exogena_razon_social', this.exogenous_data.exogena_razon_social);
-    this.formData.append('exogena_nombre1', this.exogenous_data.exogena_nombre1);
-    this.formData.append('exogena_nombre2', this.exogenous_data.exogena_nombre2);
-    this.formData.append('exogena_apellido1', this.exogenous_data.exogena_apellido1);
-    this.formData.append('exogena_apellido2', this.exogenous_data.exogena_apellido2);
+    this.formData.append('exogena_razon_social', this.exogenous_data.exogena_razon_social || '');
+    this.formData.append('exogena_nombre1', this.exogenous_data.exogena_nombre1 || '');
+    this.formData.append('exogena_nombre2', this.exogenous_data.exogena_nombre2 || '');
+    this.formData.append('exogena_apellido1', this.exogenous_data.exogena_apellido1 || '');
+    this.formData.append('exogena_apellido2', this.exogenous_data.exogena_apellido2 || '');
     this.formData.append('exogena_direccion', this.exogenous_data.exogena_direccion);
     this.formData.append('exogena_ciudad', this.exogenous_data.exogena_ciudad);
     this.formData.append('exogena_departamento', this.exogenous_data.exogena_departamento);
