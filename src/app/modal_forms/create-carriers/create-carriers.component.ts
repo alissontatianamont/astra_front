@@ -40,13 +40,13 @@ export class CreateCarriersComponent implements OnInit {
       this.carrier_id = carrier_data_id.carrier_id;
       // console.log(this.carrier_id);
     }
-    console.log(this.carrier_id);
+    // console.log(this.carrier_id);
   }
   @Output() carrierCreated = new EventEmitter<void>();
   ngOnInit(): void {
     if(this.carrier_id !== undefined){
       this.carriersService.getCarrier(this.carrier_id).subscribe((data:any)=>{
-        console.log(data);
+        // console.log(data);
         
         this.carriers ={
           transportadora_razon_social: data.transportadora_razon_social,

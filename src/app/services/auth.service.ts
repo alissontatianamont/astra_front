@@ -22,11 +22,11 @@ export class AuthService {
   }
   
   createUser(user: any): Observable<any>{
-    console.log("entra a create");
+
     return this.http.post(`${this.base_api}users`,user);
   }
   updateUser(user: any, $id): Observable<any>{
-    console.log("entra a update");
+
     
     return this.http.post(`${this.base_api}users/${$id}`,user);
   }
@@ -51,8 +51,6 @@ export class AuthService {
         }
       });
     } else {
-      console.log('asdasdasdasd');
-      
        this.router.navigate(['/login']);
     }
   }
@@ -68,7 +66,6 @@ export class AuthService {
     return localStorage.getItem('accessToken');
   }
   updateProfile(user: any, $id): Observable<any> {
-    console.log("entra a update");
     
     return this.http.post(`${this.base_api}update_profile/${$id}`,user);
   }  

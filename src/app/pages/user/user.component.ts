@@ -73,9 +73,7 @@ export class UserComponent implements OnInit {
     this.user_id = localStorage.getItem('usuario_id');
     
     this.authService.getUser(this.user_id).subscribe((data:any)=>{
-      
       this.user_data = data;
-      console.log(this.user_data.nombre_usuario);
       this.avatarName = this.user_data.avatar;
       this.getImageUrl();
     });

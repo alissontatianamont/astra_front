@@ -32,13 +32,14 @@ export interface RoutesData {
 export class TravelsComponent implements OnInit {
   displayedColumns: string[] = ['viaje_id', 'viaje_nombre_conducto','viaje_ruta','viaje_flete','viaje_neto_pago', 'viaje_anticipo', 'viaje_total_gastos','viaje_total_ganancias', 'action'];
   dataSource: MatTableDataSource<RoutesData>;
-
+  rol_user: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private http: HttpClient, public dialog: MatDialog, private routesService: RoutesService) { }
 
   ngOnInit() {
+    this.rol_user = JSON.parse(localStorage.getItem('rol'));
     this.loadData();
   }
 
@@ -46,7 +47,7 @@ export class TravelsComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateRoutesComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
       this.loadData();
     });
   }
@@ -55,7 +56,7 @@ export class TravelsComponent implements OnInit {
       data:{viaje_id:viaje_id}
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
       this.loadData();
     });
   }
@@ -74,7 +75,7 @@ export class TravelsComponent implements OnInit {
     });
 
     dialogView.afterClosed().subscribe(result => {
-      console.log(`Dialog resulttt: ${result}`);
+      // console.log(`Dialog resulttt: ${result}`);
       this.loadData();
     });
   }
@@ -133,28 +134,53 @@ export class TravelsComponent implements OnInit {
     });
   }
   loadData() {
-    this.routesService.getRoutes().subscribe((data:any)=>{
-      // console.log(data);
-      const routesData: RoutesData[] = data.map(route => ({
-        viaje_id: route.viaje_id,
-        fo_viaje_usuario: route.fo_viaje_usuario,
-        viaje_destino_inicio: route.viaje_destino_inicio,
-        viaje_destino_llegada: route.viaje_destino_llegada,
-        viaje_fecha_inicio: route.viaje_fecha_inicio,
-        viaje_fecha_llegada: route.viaje_fecha_llegada,
-        viaje_planilla:route.viaje_planilla,
-        viaje_total_gastos:route.viaje_total_gastos,
-        viaje_flete:route.viaje_flete,
-        viaje_neto_pago:route.viaje_neto_pago,
-        viaje_anticipo:route.viaje_anticipo,
-        viaje_nombre_conducto:route.nombre_conductor,
-        viaje_total_ganancias:route.viaje_total_ganancias,
-        viaje_estatus:route.viaje_estatus
-      }));
-      this.dataSource = new MatTableDataSource(routesData);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+    if(this.rol_user == 2){
+      this.routesService.getRoutes().subscribe((data:any)=>{
+        // console.log(data);
+        const routesData: RoutesData[] = data.map(route => ({
+          viaje_id: route.viaje_id,
+          fo_viaje_usuario: route.fo_viaje_usuario,
+          viaje_destino_inicio: route.viaje_destino_inicio,
+          viaje_destino_llegada: route.viaje_destino_llegada,
+          viaje_fecha_inicio: route.viaje_fecha_inicio,
+          viaje_fecha_llegada: route.viaje_fecha_llegada,
+          viaje_planilla:route.viaje_planilla,
+          viaje_total_gastos:route.viaje_total_gastos,
+          viaje_flete:route.viaje_flete,
+          viaje_neto_pago:route.viaje_neto_pago,
+          viaje_anticipo:route.viaje_anticipo,
+          viaje_nombre_conducto:route.nombre_conductor,
+          viaje_total_ganancias:route.viaje_total_ganancias,
+          viaje_estatus:route.viaje_estatus
+        }));
+        this.dataSource = new MatTableDataSource(routesData);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+    }else if(this.rol_user == 1){
+      this.routesService.getRoutesByUser(localStorage.getItem('usuario_id')).subscribe((data:any)=>{
+        // console.log(data);
+        const routesData: RoutesData[] = data.map(route => ({
+          viaje_id: route.viaje_id,
+          fo_viaje_usuario: route.fo_viaje_usuario,
+          viaje_destino_inicio: route.viaje_destino_inicio,
+          viaje_destino_llegada: route.viaje_destino_llegada,
+          viaje_fecha_inicio: route.viaje_fecha_inicio,
+          viaje_fecha_llegada: route.viaje_fecha_llegada,
+          viaje_planilla:route.viaje_planilla,
+          viaje_total_gastos:route.viaje_total_gastos,
+          viaje_flete:route.viaje_flete,
+          viaje_neto_pago:route.viaje_neto_pago,
+          viaje_anticipo:route.viaje_anticipo,
+          viaje_nombre_conducto:route.nombre_conductor,
+          viaje_total_ganancias:route.viaje_total_ganancias,
+          viaje_estatus:route.viaje_estatus
+        }));
+        this.dataSource = new MatTableDataSource(routesData);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+    }
   }
 
   applyFilter(event: Event) {

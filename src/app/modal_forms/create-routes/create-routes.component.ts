@@ -39,8 +39,11 @@ export class CreateRoutesComponent implements OnInit{
   formData : any;
   userId : any;
   viaje_id: any; 
+  rol_user: any;
+  user_rol_id: any;
   drivers: any[] = [];
   carriers: any[] = [];
+  
   routes: RouteData = {
     viaje_num_manifiesto: '',
     viaje_fecha_manifiesto: new Date(),
@@ -66,11 +69,12 @@ export class CreateRoutesComponent implements OnInit{
   @Output() routeCreated = new EventEmitter<void>();
   constructor(private carriersService: CarriersService,private routesService: RoutesService, private dialogRef: MatDialogRef<CreateRoutesComponent>,@Inject(MAT_DIALOG_DATA) public data:any, private authService: AuthService) {
     this.userId = this.authService.getUserId();
-    // console.log('Usuario ID:', this.userId);
+    
     if (data?.viaje_id) {
       this.viaje_id = data.viaje_id;
       console.log(this.viaje_id);
     }
+    this.rol_user = JSON.parse(localStorage.getItem('rol'));
     
   }
   getFile(event: any):any{
@@ -93,11 +97,12 @@ export class CreateRoutesComponent implements OnInit{
     })
   }
   ngOnInit(): void {
+
     this.getUsers();
     this.getCarriers();
     this.userId = this.authService.getUserId(); 
+    
     this.routes.fo_viaje_usuario = this.userId;
-  
     if (this.viaje_id !== null) {
       this.routesService.getRoute(this.viaje_id).subscribe((data: any) => {
         this.routes = {
@@ -129,6 +134,10 @@ export class CreateRoutesComponent implements OnInit{
   }
   
   OnSubmit(){
+    if (this.rol_user == 1) {
+      this.routes.fo_viaje_usuario = localStorage.getItem('usuario_id');
+      
+    }
     //fecha manifiesto
     let fecha_manifiesto = new Date(this.routes.viaje_fecha_manifiesto);
     let formatoFecha_manifiesto = new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -168,8 +177,6 @@ export class CreateRoutesComponent implements OnInit{
     this.formData.append("viaje_observaciones",this.routes.viaje_observaciones );
     this.formData.append("viaje_peso",this.routes.viaje_peso );
     this.formData.append("viaje_estatus", 1 );
-    // console.log(this.formData);
-    // return;
     if(this.viaje_id !== undefined){
       // console.log(this.formData);
       // return;

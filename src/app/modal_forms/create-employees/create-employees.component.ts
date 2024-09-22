@@ -46,7 +46,7 @@ export class CreateEmployeesComponent implements OnInit {
  
     if (data?.id_user) {
       this.id_user = data.id_user;
-      console.log(this.id_user);
+      // console.log(this.id_user);
     }
    }
    togglePasswordVisibility() {

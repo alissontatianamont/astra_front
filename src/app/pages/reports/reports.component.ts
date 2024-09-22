@@ -103,7 +103,7 @@ export class ReportsComponent implements OnInit {
         document.body.removeChild(a);
       },
       error => {
-        console.log(error);
+        // console.log(error);
         
         // Manejo de errores
         Swal.fire({

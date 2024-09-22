@@ -44,7 +44,7 @@ export class ViewCarrierComponent implements OnInit {
         transportadora_razon_social: data.transportadora_razon_social,
         transportadora_telefono: data.transportadora_telefono,
       }
-        console.log(data);
+        // console.log(data);
     });
   }
 

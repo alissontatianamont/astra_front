@@ -6,7 +6,9 @@ declare interface RouteInfo {
   icon: string;
   class: string;
 }
-export const ROUTES: RouteInfo[] = [
+let rol_user = JSON.parse(localStorage.getItem('rol'));
+
+export let ROUTES: RouteInfo[] = [
   {
     path: "/dashboard",
     title: "Dashboard",
@@ -35,22 +37,33 @@ export const ROUTES: RouteInfo[] = [
     path: "/employees",
     title: "Empleados",
     icon: "icon-single-02",
-    class: "" },
+    class: ""
+  },
   {
     path: "/reports",
     title: "Informes",
     icon: "icon-single-copy-04",
     class: ""
   },
-
   {
     path: "/user",
     title: "Mi perfil",
     icon: "icon-badge",
     class: ""
   },
- 
 ];
+
+// Filtrar rutas según el rol del usuario
+const allRoutes = [...ROUTES]; // Copiar las rutas originales
+
+if (rol_user == 1) {
+  ROUTES = allRoutes.filter(route => 
+    route.path === '/dashboard' || 
+    route.path === '/travels' || 
+    route.path === '/user'
+  );
+}
+
 
 @Component({
   selector: "app-sidebar",
