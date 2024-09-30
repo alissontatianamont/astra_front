@@ -25,18 +25,20 @@ export class AuthService {
 
     return this.http.post(`${this.base_api}users`,user);
   }
-  updateUser(user: any, $id): Observable<any>{
 
-    
+  updateUser(user: any, $id): Observable<any>{
     return this.http.post(`${this.base_api}users/${$id}`,user);
   }
+
   login(email:string, password:string):Observable<any>{
     return this.http.post<any>(`${this.base_api}login`,{email,password});
   }
+
   getUserId(): number | null {
     const userId = localStorage.getItem('usuario_id');
     return userId ? parseInt(userId, 10) : null;
   }
+
   logout() {
     const token = localStorage.getItem('accessToken');
     if (token) {
@@ -58,6 +60,7 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('accessToken');
   }
+
   deleteUser($id) {
     return this.http.post(`${this.base_api}delete/${$id}`,$id);
   }
@@ -65,8 +68,8 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('accessToken');
   }
+
   updateProfile(user: any, $id): Observable<any> {
-    
     return this.http.post(`${this.base_api}update_profile/${$id}`,user);
   }  
 }

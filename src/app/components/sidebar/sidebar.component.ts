@@ -6,7 +6,6 @@ declare interface RouteInfo {
   icon: string;
   class: string;
 }
-let rol_user = JSON.parse(localStorage.getItem('rol'));
 
 export let ROUTES: RouteInfo[] = [
   {
@@ -53,35 +52,38 @@ export let ROUTES: RouteInfo[] = [
   },
 ];
 
-// Filtrar rutas según el rol del usuario
-const allRoutes = [...ROUTES]; // Copiar las rutas originales
-
-if (rol_user == 1) {
-  ROUTES = allRoutes.filter(route => 
-    route.path === '/dashboard' || 
-    route.path === '/travels' || 
-    route.path === '/user'
-  );
-}
-
-
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
   styleUrls: ["./sidebar.component.scss"]
 })
 export class SidebarComponent implements OnInit {
-  menuItems: any[];
+  menuItems: RouteInfo[] = [];
 
   constructor() {}
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.updateMenuItems(); // Llamar al método para actualizar las rutas
   }
-  isMobileMenu() {
-    if (window.innerWidth > 991) {
-      return false;
+
+  updateMenuItems() {
+    const rol_user = JSON.parse(localStorage.getItem('rol')) || 0; // Obtener el rol del localStorage, o 0 si no hay rol
+
+    const allRoutes = [...ROUTES]; // Copiar las rutas originales
+
+    if (rol_user === 1) {
+      // Filtrar las rutas solo para rol 1
+      this.menuItems = allRoutes.filter(route => 
+        route.path === '/dashboard' || 
+        route.path === '/travels' || 
+        route.path === '/user'
+      );
+    } else {
+      this.menuItems = allRoutes; // Mostrar todas las rutas para otros roles
     }
-    return true;
+  }
+
+  isMobileMenu() {
+    return window.innerWidth <= 991;
   }
 }

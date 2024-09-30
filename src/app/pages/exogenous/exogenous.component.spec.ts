@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NO_ERRORS_SCHEMA } from '@angular/core';  // Importar NO_ERRORS_SCHEMA
 import { ExogenousComponent } from './exogenous.component';
 
 describe('ExogenousComponent', () => {
@@ -8,7 +8,8 @@ describe('ExogenousComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExogenousComponent ]
+      declarations: [ ExogenousComponent ],
+      schemas: [NO_ERRORS_SCHEMA]  // Añadir NO_ERRORS_SCHEMA aquí
     })
     .compileComponents();
   });

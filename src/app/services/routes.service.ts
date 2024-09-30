@@ -16,6 +16,7 @@ export class RoutesService {
   getRoutesByUser(user_id){
     return this.http.get(`${this.base_api}get_routes_by_user/${user_id}`);
   }
+  
   createRoute(route: any ): Observable<any>{
     return this.http.post(`${this.base_api}create_route`, route);
   }

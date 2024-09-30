@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { ExogenousService } from 'src/app/services/exogenous.service';
@@ -24,6 +25,7 @@ export interface ExogenousData {
   styleUrls: ['./create-exogenous.component.scss']
 })
 export class CreateExogenousComponent implements OnInit {
+  exogenousForm: FormGroup;
   exogenous_id: any;
   formData: any;
   exogenous_data: ExogenousData = {

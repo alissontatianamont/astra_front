@@ -15,6 +15,7 @@ export class DashboardServiceService {
   getCountRoutesByMonth(){
     return this.http.get(`${this.base_api}get_count_routes_by_month`);
   }
+  
   getCountRoutesByUser(user_id: number){
     return this.http.get(`${this.base_api}get_count_routes_by_month_user/${user_id}`);
   }

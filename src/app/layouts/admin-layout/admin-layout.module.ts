@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
@@ -42,8 +42,33 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { AuthInterceptor } from "../../auth.interceptor";
 import { AuthService } from "src/app/services/auth.service";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatOptionModule } from '@angular/material/core';
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [
+    DashboardComponent,
+    UserComponent,
+    EmployeesComponent,
+    TravelsComponent,
+    CarriersComponent,
+    ExogenousComponent,
+    ReportsComponent,
+    CreateRoutesComponent,
+    ViewEgressComponent,
+    ViewCarrierComponent,
+    ViewExogenousComponent,
+    CreateCarriersComponent,
+    CreateExogenousComponent,
+    ViewTravelComponent,
+    CreateEmployeesComponent,
+    ViewEmployeeComponent,
+    CertificationsComponent,
+    CreateEgressComponent
+  ],
   imports: [
+    BrowserModule,
+    MatOptionModule,
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
@@ -67,26 +92,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MatTabsModule,
     CKEditorModule
   ],
-  declarations: [
-    DashboardComponent,
-    UserComponent,
-    EmployeesComponent,
-    TravelsComponent,
-    CarriersComponent,
-    ExogenousComponent,
-    ReportsComponent,
-    CreateRoutesComponent,
-    ViewEgressComponent,
-    ViewCarrierComponent,
-    ViewExogenousComponent,
-    CreateCarriersComponent,
-    CreateExogenousComponent,
-    ViewTravelComponent,
-    CreateEmployeesComponent,
-    ViewEmployeeComponent,
-    CertificationsComponent,
-    CreateEgressComponent
-  ],
+
   // exports: [CreateRoutesComponent],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
