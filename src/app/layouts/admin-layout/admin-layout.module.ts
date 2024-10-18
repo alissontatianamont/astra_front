@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
@@ -42,33 +42,9 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { AuthInterceptor } from "../../auth.interceptor";
 import { AuthService } from "src/app/services/auth.service";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-import { MatOptionModule } from '@angular/material/core';
+import { AllowOnlyNumbersDirective } from "src/app/directive/allow-only-numbers.directive";
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [
-    DashboardComponent,
-    UserComponent,
-    EmployeesComponent,
-    TravelsComponent,
-    CarriersComponent,
-    ExogenousComponent,
-    ReportsComponent,
-    CreateRoutesComponent,
-    ViewEgressComponent,
-    ViewCarrierComponent,
-    ViewExogenousComponent,
-    CreateCarriersComponent,
-    CreateExogenousComponent,
-    ViewTravelComponent,
-    CreateEmployeesComponent,
-    ViewEmployeeComponent,
-    CertificationsComponent,
-    CreateEgressComponent
-  ],
   imports: [
-    BrowserModule,
-    MatOptionModule,
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
@@ -92,7 +68,27 @@ import { MatOptionModule } from '@angular/material/core';
     MatTabsModule,
     CKEditorModule
   ],
-
+  declarations: [
+    AllowOnlyNumbersDirective,
+    DashboardComponent,
+    UserComponent,
+    EmployeesComponent,
+    TravelsComponent,
+    CarriersComponent,
+    ExogenousComponent,
+    ReportsComponent,
+    CreateRoutesComponent,
+    ViewEgressComponent,
+    ViewCarrierComponent,
+    ViewExogenousComponent,
+    CreateCarriersComponent,
+    CreateExogenousComponent,
+    ViewTravelComponent,
+    CreateEmployeesComponent,
+    ViewEmployeeComponent,
+    CertificationsComponent,
+    CreateEgressComponent
+  ],
   // exports: [CreateRoutesComponent],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

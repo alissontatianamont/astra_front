@@ -1,24 +1,24 @@
 <h2 mat-dialog-title>Generar nueva transportadora</h2>
-<form (ngSubmit)="OnSubmit()"  #userForm="ngForm">
+<form (ngSubmit)="OnSubmit()"  #carrierForm="ngForm">
 <mat-dialog-content class="mat-typography ">
   <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-md-4">
           <mat-form-field>
             <mat-label>Razón social</mat-label>
-            <input   matInput name="transportadora_razon_social" [(ngModel)]="carriers.transportadora_razon_social">
+            <input   matInput name="transportadora_razon_social" [(ngModel)]="carriers.transportadora_razon_social" required #razon_social="ngModel">
           </mat-form-field>
         </div>
         <div class="col-12 col-md-4">
             <mat-form-field>
                 <mat-label>Nit</mat-label>
-                <input name="transportadora_nit" [(ngModel)]="carriers.transportadora_nit" matInput>
+                <input name="transportadora_nit" appAllowOnlyNumbers  [(ngModel)]="carriers.transportadora_nit" matInput required #nit="ngModel">
               </mat-form-field>
         </div>
         <div class="col-12 col-md-4">
           <mat-form-field>
             <mat-label>Dv</mat-label>
-            <input name="transportadora_dv" [(ngModel)]="carriers.transportadora_dv" matInput>
+            <input name="transportadora_dv" appAllowOnlyNumbers [(ngModel)]="carriers.transportadora_dv" matInput required #dv="ngModel">
           </mat-form-field>
         </div>
     </div>
@@ -26,13 +26,13 @@
       <div class="col-md-6 col-12">
         <mat-form-field class="w-100">
           <mat-label>Dirección</mat-label>
-          <input name="transportadora_direccion" [(ngModel)]="carriers.transportadora_direccion" matInput>
+          <input name="transportadora_direccion" [(ngModel)]="carriers.transportadora_direccion" matInput required #direccion="ngModel">
         </mat-form-field>
       </div>
       <div class="col-md-6 col-12">
         <mat-form-field class="w-100">
           <mat-label>Teléfono </mat-label>
-          <input name="transportadora_telefono" [(ngModel)]="carriers.transportadora_telefono" matInput>
+          <input name="transportadora_telefono" appAllowOnlyNumbers [(ngModel)]="carriers.transportadora_telefono" matInput required #telefono="ngModel">
         </mat-form-field>
       </div>
     </div>
@@ -40,18 +40,18 @@
       <div class="col-md-6 col-12">
         <mat-form-field class="w-100">
           <mat-label>Ciudad</mat-label>
-          <input name="transportadora_ciudad" [(ngModel)]="carriers.transportadora_ciudad" matInput>
+          <input name="transportadora_ciudad" [(ngModel)]="carriers.transportadora_ciudad" matInput required #ciudad="ngModel">
         </mat-form-field>
       </div>
       <div class="col-md-6 col-12">
         <mat-form-field class="w-100">
           <mat-label>Departamento</mat-label>
-          <input name="transportadora_departamento" [(ngModel)]="carriers.transportadora_departamento" matInput>
+          <input name="transportadora_departamento" [(ngModel)]="carriers.transportadora_departamento" matInput required #departamento="ngModel">
         </mat-form-field>
       </div>
     </div>
   </div>
-  <button mat-button type="submit">Guardar</button>
+  <button mat-button type="submit" class="w-100 btn btn-danger btn-block" [disabled]="carrierForm.invalid">Guardar</button>
 </mat-dialog-content>
 </form>
 <mat-dialog-actions align="end">

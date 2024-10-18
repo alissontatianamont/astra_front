@@ -48,13 +48,13 @@
       <div [ngClass]="rol_user === 1 ? 'col-md-6' : 'col-md-4'">
         <mat-form-field class="w-100">
           <mat-label>Km salida</mat-label>
-          <input  name="viaje_km_salida" [(ngModel)]="routes.viaje_km_salida" matInput>
+          <input  name="viaje_km_salida" appAllowOnlyNumbers [(ngModel)]="routes.viaje_km_salida" matInput>
         </mat-form-field>
       </div>
       <div [ngClass]="rol_user === 1 ? 'col-md-6' : 'col-md-4'">
         <mat-form-field class="w-100">
           <mat-label>Km llegada</mat-label>
-          <input  name="viaje_km_llegada" [(ngModel)]="routes.viaje_km_llegada" matInput>
+          <input  name="viaje_km_llegada" appAllowOnlyNumbers [(ngModel)]="routes.viaje_km_llegada" matInput>
         </mat-form-field>
       </div>
       <div class="col-md-4 col-12" *ngIf="rol_user !== 1">
@@ -66,7 +66,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>        
-        <mat-form-field [hidden]="false">
+        <mat-form-field [hidden]="true">
           <input name="fo_viaje_usuario_hidden" [(ngModel)]="routes.fo_viaje_usuario"   matInput>
         </mat-form-field>
       </div>
@@ -95,19 +95,19 @@
       <div class="col-12 col-md-4 d-flex justify-content-center">
         <mat-form-field>
           <mat-label >Flete</mat-label>
-          <input name="viaje_flete" [(ngModel)]="routes.viaje_flete" matInput>
+          <input name="viaje_flete" appAllowOnlyNumbers [(ngModel)]="routes.viaje_flete" matInput>
         </mat-form-field>
       </div>
       <div class="col-12 col-md-4 d-flex justify-content-center">
         <mat-form-field>
           <mat-label>Anticipo</mat-label>
-          <input name="viaje_anticipo" [(ngModel)]="routes.viaje_anticipo" matInput>
+          <input name="viaje_anticipo" appAllowOnlyNumbers [(ngModel)]="routes.viaje_anticipo" matInput>
         </mat-form-field>
       </div>
       <div class="col-12 col-md-4 d-flex justify-content-center">
         <mat-form-field>
           <mat-label>sobrecosto (si hay)</mat-label>
-          <input name="viaje_sobrecosto" [(ngModel)]="routes.viaje_sobrecosto" matInput>
+          <input name="viaje_sobrecosto" appAllowOnlyNumbers [(ngModel)]="routes.viaje_sobrecosto" matInput>
         </mat-form-field>
       </div>
     </div>
@@ -115,19 +115,19 @@
       <div class="col-12 col-md-4 d-flex justify-content-center">
         <mat-form-field>
           <mat-label >Valor neto a pagar</mat-label>
-          <input name="viaje_neto_pago" [(ngModel)]="routes.viaje_neto_pago" matInput>
+          <input name="viaje_neto_pago" appAllowOnlyNumbers [(ngModel)]="routes.viaje_neto_pago" matInput>
         </mat-form-field>
       </div>
       <div class="col-12    col-md-4 d-flex justify-content-center">
         <mat-form-field>
           <mat-label>Porcentaje conductor</mat-label>
-          <input name="viaje_porcentaje_conductor" [(ngModel)]="routes.viaje_porcentaje_conductor" matInput>
+          <input name="viaje_porcentaje_conductor" appAllowOnlyNumbers [(ngModel)]="routes.viaje_porcentaje_conductor" matInput>
         </mat-form-field>
       </div>
       <div class="col-12    col-md-4 d-flex justify-content-center">
         <mat-form-field>
           <mat-label>Peso bruto (kg)</mat-label>
-          <input name="viaje_peso" [(ngModel)]="routes.viaje_peso" matInput>
+          <input name="viaje_peso" appAllowOnlyNumbers [(ngModel)]="routes.viaje_peso" matInput>
         </mat-form-field>
       </div>
       

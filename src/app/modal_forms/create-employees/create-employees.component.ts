@@ -29,6 +29,7 @@ export class CreateEmployeesComponent implements OnInit {
   formdata: any;
   id_user: any;
   hide = true;
+  passwordRequired: boolean = true;
   user: EmployeeData = {
     nombre_usuario: '',
     email: '',
@@ -40,23 +41,46 @@ export class CreateEmployeesComponent implements OnInit {
     fecha_contratacion: new Date(),
     avatar: ''
   };
+  
   @Output() userCreated = new EventEmitter<void>();
+
   constructor(private authService: AuthService, private dialogRef: MatDialogRef<CreateEmployeesComponent>,@Inject(MAT_DIALOG_DATA) public data:any) {
-    
- 
-    if (data?.id_user) {
-      this.id_user = data.id_user;
-      // console.log(this.id_user);
-    }
-   }
+  
+    if (data?.id_user) {this.id_user = data.id_user;}
+  
+  }
+
+   getRepeatMail(): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.authService.getUsers().subscribe((data: any) => {
+        let emails = data.map((user: any) => user.email);
+        if (emails.includes(this.user.email)) {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Ya existe un usuario con este correo",
+            showConfirmButton: false,
+            timer: 1200
+          });
+          this.user.email = '';
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+  
    togglePasswordVisibility() {
     this.hide = !this.hide;
   }
+
   ngOnInit(): void {
+   
     
     
-    if (this.id_user !== null) {
-      
+    
+    if (this.id_user != null ) { 
          this.authService.getUser(this.id_user).subscribe( (data: any) => {
       
       this.user = {
@@ -71,32 +95,38 @@ export class CreateEmployeesComponent implements OnInit {
         avatar: `${this.base_api}images/profile/`+data.avatar
       };
     },);
+    this.passwordRequired = false;
+    }else{
+      this.passwordRequired = true;
     }
-  }
-getFile(event: any):any{
-  const file = event.target.files[0];
-  if (file) {
-    this.file_user = file;
-  }else{
-    this.file_user = null;
-  }
+    console.log(this.passwordRequired);
     
-}
+  }
+  
+  getFile(event: any):any{
+    const file = event.target.files[0];
+    if (file) {
+      this.file_user = file;
+    }else{
+      this.file_user = null;
+    }
+      
+  }
 
 
-  OnSubmit(){
+async OnSubmit() {
+  let getRepeatMail = await this.getRepeatMail();  
+
+  if (getRepeatMail == false) {  
     let fecha = new Date(this.user.fecha_contratacion);
     let formatoFecha = new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
     let fechaFormateada = formatoFecha.format(fecha);
 
     this.formdata = new FormData();
-    if (this.file_user == null ) {
-     // console.log("sin: "+this.file_user);
+    if (this.file_user == null) {
       this.formdata.append('avatar', this.user.avatar);
     } else {
-      // console.log("con: "+this.file_user);
       this.formdata.append('avatar', this.file_user, this.file_user.name);
-
     }
     this.formdata.append("nombre_usuario", this.user.nombre_usuario);
     this.formdata.append("email", this.user.email);
@@ -105,16 +135,11 @@ getFile(event: any):any{
     this.formdata.append("cedula", this.user.cedula);
     this.formdata.append("rol", this.user.rol);
     this.formdata.append("telefono", this.user.telefono);
-    this.formdata.append("fecha_contratacion",fechaFormateada );
-    
-    // console.log(this.formdata);
-    
+    this.formdata.append("fecha_contratacion", fechaFormateada);
+
     if (this.id_user !== undefined) {
-      // console.log(this.id_user);
-      
       this.authService.updateUser(this.formdata, this.id_user).subscribe({
-        next:(response)=>{
-          // console.log('good',response);
+        next: (response) => {
           Swal.fire({
             position: "center",
             icon: "success",
@@ -125,16 +150,13 @@ getFile(event: any):any{
           this.userCreated.emit();
           this.dialogRef.close();
         },
-        error:(error)=>{
-          console.error('bad',error);
+        error: (error) => {
+          console.error('bad', error);
         },
-      })
-    }else{
+      });
+    } else {
       this.authService.createUser(this.formdata).subscribe({
-        next:(response)=>{
-          // console.log(this.formdata);
-          
-          // console.log('good',response);
+        next: (response) => {
           Swal.fire({
             position: "center",
             icon: "success",
@@ -145,11 +167,12 @@ getFile(event: any):any{
           this.userCreated.emit();
           this.dialogRef.close();
         },
-        error:(error)=>{
-          console.error('bad',error);
+        error: (error) => {
+          console.error('bad', error);
         },
-      })
+      });
     }
-    
   }
+}
+
 }

@@ -16,7 +16,7 @@ export interface EmployeeData {
   position: string;
   hire_date: string;
   status: string;
-  avatar_user:string;
+  avatar_user: string;
 }
 
 @Component({
@@ -33,7 +33,7 @@ export class EmployeesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private authService: AuthService, private http: HttpClient, public dialog: MatDialog) {}
+  constructor(private authService: AuthService, private http: HttpClient, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadData();
@@ -43,7 +43,7 @@ export class EmployeesComponent implements OnInit {
     this.authService.getUsers().subscribe((data: any) => {
       // Mapea los datos recibidos a la estructura esperada por la tabla
       const employees: EmployeeData[] = data.map(user => ({
-       
+
         id_user: user.usuario_id,
         employee: user.nombre_usuario,
         id_card: user.cedula.toString(),
@@ -74,48 +74,49 @@ export class EmployeesComponent implements OnInit {
 
     dialogRef.componentInstance.userCreated.subscribe(() => {
       dialogRef.close();
-      this.loadData(); 
+      this.loadData();
     });
   }
-editEmployee(id_user: number){
-  const dialogRef = this.dialog.open(CreateEmployeesComponent,{
-    data:{id_user:id_user}
-  });
 
-  dialogRef.componentInstance.userCreated.subscribe(() => {
-    dialogRef.close();
-    this.loadData(); 
-  });
-}
-deleteEmployee(id_user: number){
-  Swal.fire({
-    title: "¿Estás seguro de eliminar a este usuario?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    cancelButtonText: "NO",
-    confirmButtonText: "SI"
-  }).then((result) => {
-    if (result.isConfirmed) {
-      this.authService.deleteUser(id_user).subscribe((data:any)=>{
-        Swal.fire({
-          title: "Se ha eliminado correctamente",
-          icon: "success"
-        });
-      });
-      this.loadData(); 
-      
-
-    }
-  });
-
-}
-  viewEmployee(id_user: number,avatar_user:string) {
-    const viewEmployee = this.dialog.open(ViewEmployeeComponent,{
-      data:{id_user:id_user, avatar_user:avatar_user}
+  editEmployee(id_user: number) {
+    const dialogRef = this.dialog.open(CreateEmployeesComponent, {
+      data: { id_user: id_user }
     });
 
-    
+    dialogRef.componentInstance.userCreated.subscribe(() => {
+      dialogRef.close();
+      this.loadData();
+    });
+  }
+  deleteEmployee(id_user: number) {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar a este usuario?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "NO",
+      confirmButtonText: "SI"
+    }).then((result) => {
+      
+      if (result.isConfirmed) {
+        this.authService.deleteUser(id_user).subscribe((data: any) => {
+          Swal.fire({
+            title: "Se ha eliminado correctamente",
+            icon: "success"
+          });
+        });
+        this.loadData();
+      }
+
+    });
+
+  }
+  viewEmployee(id_user: number, avatar_user: string) {
+    const viewEmployee = this.dialog.open(ViewEmployeeComponent, {
+      data: { id_user: id_user, avatar_user: avatar_user }
+    });
+
+
   }
 }

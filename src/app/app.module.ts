@@ -19,11 +19,11 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { LoginComponent } from './pages/login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatOptionModule } from '@angular/material/core';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  
   imports: [
     BrowserModule,
     MatOptionModule,
@@ -39,12 +39,13 @@ import { MatOptionModule } from '@angular/material/core';
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
+    MatDialogModule
   ],
   declarations: [AppComponent, AdminLayoutComponent, LoginComponent],
   providers: [AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
-  
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

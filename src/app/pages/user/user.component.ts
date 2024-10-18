@@ -15,6 +15,7 @@ export class UserComponent implements OnInit {
   user_id: any;
   imageSrc: any;
   constructor(private authService: AuthService) {}
+  
   getImageUrl() {
     this.authService.getAvatarUser(this.avatarName).subscribe((data: any) => {
       this.imageSrc = data.url;
@@ -26,27 +27,25 @@ export class UserComponent implements OnInit {
     this.hide = !this.hide;
   }
   onSubmit() {
-    // Verifica si el input de contraseña tiene un valor
+  
     if (this.user_data.contrasena) {
-      // Reemplaza el valor de la contraseña en user_data con el del input
+
       this.user_data.password = this.user_data.contrasena;
     }else{
       delete this.user_data.password;
     }
   
-    // Elimina 'contrasena' de user_data si existe
     delete this.user_data.contrasena;
   
-    // Crea FormData
+
     this.formdata = new FormData();
+
     for (const key in this.user_data) {
       if (this.user_data.hasOwnProperty(key)) {
-        // Agrega cada campo al FormData
         this.formdata.append(key, this.user_data[key]);
       }
     }
-    // console.log(this.formdata);
-    // return;
+
     // Llama al servicio para actualizar el usuario
     this.authService.updateProfile(this.formdata, this.user_id).subscribe({
       next: response => {
@@ -63,11 +62,6 @@ export class UserComponent implements OnInit {
       }
     });
   }
-  
-  
-  
-  
-  
 
   ngOnInit() {
     this.user_id = localStorage.getItem('usuario_id');

@@ -1,18 +1,28 @@
 <h2 mat-dialog-title>Empleado</h2>
-<form (ngSubmit)="OnSubmit()" #userForm="ngForm">
+<form (ngSubmit)="OnSubmit()" #employeeForm="ngForm">
     <mat-dialog-content class="mat-typography ">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-6">
                     <mat-form-field class="w-100">
                         <mat-label>Nombre completo</mat-label>
-                        <input matInput name="nombre_usuario" [(ngModel)]="user.nombre_usuario">
+                        <input matInput name="nombre_usuario" [(ngModel)]="user.nombre_usuario" required #nombre="ngModel" >
                       </mat-form-field>
                 </div>
                 <div class="col-12 col-md-6">
                     <mat-form-field class="w-100">
                         <mat-label>Contraseña</mat-label>
-                        <input name="contrasena" matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="user.contrasena">
+                        <input 
+                          name="random_contrasena_field" 
+                          matInput 
+                          autocomplete="new-password" 
+                          autocorrect="off" 
+                          autocapitalize="off"
+                          [type]="hide ? 'password' : 'text'" 
+                          [(ngModel)]="user.contrasena" 
+                          [required]="passwordRequired" 
+                          #contrasena="ngModel"
+                        >
                         <button type="button" mat-icon-button matSuffix (click)="togglePasswordVisibility()">
                           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
@@ -23,13 +33,13 @@
                 <div class="col-12 col-md-6">
                     <mat-form-field class="w-100">
                         <mat-label>Cédula</mat-label>
-                        <input matInput  name="cedula"  [(ngModel)]="user.cedula">
+                        <input matInput  name="cedula" appAllowOnlyNumbers  [(ngModel)]="user.cedula" required #cedula="ngModel">
                       </mat-form-field>
                 </div>
                 <div class="col-12 col-md-6">
                       <mat-form-field  class="w-100">
                         <mat-label>Cargo</mat-label>
-                        <mat-select name="cargo" [(ngModel)]="user.rol">
+                        <mat-select name="cargo" [(ngModel)]="user.rol" required #cargo="ngModel">
                           <mat-option value="1">Conductor</mat-option>
                           <mat-option value="2">Administrador</mat-option>
                         </mat-select>
@@ -41,13 +51,13 @@
                 <div class="col-md-6">
                     <mat-form-field class="w-100">
                         <mat-label>Correo</mat-label>
-                        <input matInput name="correo"  [(ngModel)]="user.email">
+                        <input matInput name="correo"  [(ngModel)]="user.email" required #correo="ngModel">
                       </mat-form-field>
                 </div>
                 <div class="col-md-6">
                     <mat-form-field class="w-100">
                         <mat-label>teléfono</mat-label>
-                        <input matInput name="telefono"  [(ngModel)]="user.telefono">
+                        <input matInput name="telefono" appAllowOnlyNumbers  [(ngModel)]="user.telefono" required #telefono="ngModel">
                       </mat-form-field>
                 </div>
             </div>
@@ -63,7 +73,7 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <mat-form-field class="w-100">
-                        <input matInput [matDatepicker]="startPicker" name="fecha_contratacion" placeholder="Fecha contratación" [(ngModel)]="user.fecha_contratacion">
+                        <input matInput [matDatepicker]="startPicker" name="fecha_contratacion" placeholder="Fecha contratación" [(ngModel)]="user.fecha_contratacion" required #fecha_contratacion="ngModel">
                         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
                         <mat-datepicker #startPicker></mat-datepicker>
                       </mat-form-field>
@@ -71,7 +81,7 @@
                 <div class="col-12 col-md-6">
                     <mat-form-field  class="w-100">
                         <mat-label>Estado</mat-label>
-                        <mat-select [(ngModel)]="user.estado_usuario">
+                        <mat-select [(ngModel)]="user.estado_usuario" required #estado_usuario="ngModel">
                           <mat-option value="1">Activo</mat-option>
                           <mat-option value="0">Inactivo</mat-option>
                         </mat-select>
@@ -80,7 +90,7 @@
                 </div>
             </div>
         </div>
-        <button mat-button type="submit">Guardar</button>
+        <button mat-button type="submit" class="w-100 btn btn-danger btn-block" [disabled]="employeeForm.invalid">Guardar</button>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
         <button  mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn-modal">Cerrar</button>
