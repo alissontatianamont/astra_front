@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  base: 'http://localhost:8000/api/'
+  base: 'https://astraback-production.up.railway.app/api/'
 };
