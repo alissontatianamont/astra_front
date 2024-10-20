@@ -147,12 +147,9 @@ export class CreateRoutesComponent implements OnInit{
     let formatoFecha_inicio = new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
     let fechaFormateada_inicio = formatoFecha_inicio.format(fecha_inicio);
     this.formData = new FormData();
-    if (this.file_planilla == null ) {
-      this.formData.append('viaje_planilla', this.routes.viaje_planilla);
-    } else {
-      this.formData.append('viaje_planilla', this.file_planilla, this.file_planilla.name);
-
-    }
+    
+    (this.file_planilla == null ) ? this.formData.append('viaje_planilla', this.routes.viaje_planilla) : this.formData.append('viaje_planilla', this.file_planilla, this.file_planilla.name);
+    
     this.formData.append("viaje_num_manifiesto", this.routes.viaje_num_manifiesto);
     this.formData.append("viaje_fecha_manifiesto", fechaFormateada_manifiesto);
     this.formData.append("viaje_placa", this.routes.viaje_placa);
@@ -161,25 +158,19 @@ export class CreateRoutesComponent implements OnInit{
     this.formData.append("viaje_destino_inicio", this.routes.viaje_destino_inicio);
     this.formData.append("viaje_destino_llegada", this.routes.viaje_destino_llegada);
     this.formData.append("viaje_fecha_inicio",  fechaFormateada_inicio);
-    this.formData.append("viaje_km_salida", this.routes.viaje_km_salida);
-    this.formData.append("viaje_km_llegada",this.routes.viaje_km_llegada );
+    this.formData.append("viaje_km_salida", this.routes.viaje_km_salida || '');
+    this.formData.append("viaje_km_llegada",this.routes.viaje_km_llegada || '');
     this.formData.append("viaje_flete",this.routes.viaje_flete );
     this.formData.append("viaje_anticipo",this.routes.viaje_anticipo );
     this.formData.append("viaje_neto_pago",this.routes.viaje_neto_pago );
-    if(this.routes.viaje_sobrecosto !== undefined){
-      this.formData.append("viaje_sobrecosto",this.routes.viaje_sobrecosto );
-    }else{
-      this.formData.append("viaje_sobrecosto",0 );
-    }
-    
+    this.formData.append("viaje_sobrecosto",this.routes.viaje_sobrecosto || 0 );
     this.formData.append("viaje_total_ganancias",this.routes.viaje_total_ganancias );
     this.formData.append("viaje_porcentaje_conductor",this.routes.viaje_porcentaje_conductor );
-    this.formData.append("viaje_observaciones",this.routes.viaje_observaciones );
-    this.formData.append("viaje_peso",this.routes.viaje_peso );
+    this.formData.append("viaje_observaciones",this.routes.viaje_observaciones || '' );
+    this.formData.append("viaje_peso",this.routes.viaje_peso || '' );
     this.formData.append("viaje_estatus", 1 );
+
     if(this.viaje_id !== undefined){
-      // console.log(this.formData);
-      // return;
         this.routesService.editRoute(this.formData, this.viaje_id).subscribe({
           next:(response)=>{
             Swal.fire({

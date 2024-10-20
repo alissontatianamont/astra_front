@@ -40,7 +40,7 @@
                 <div class="col-3">
                     <mat-form-field class="w-100">
                         <mat-label>Nombre 2</mat-label>
-                        <input matInput name="exogena_nombre2" [(ngModel)]="exogenous_data.exogena_nombre2" required
+                        <input matInput name="exogena_nombre2" [(ngModel)]="exogenous_data.exogena_nombre2" 
                                #nombre2="ngModel">
                         <mat-error *ngIf="nombre2.invalid && nombre2.touched">Este campo es requerido</mat-error>
                     </mat-form-field>
@@ -56,7 +56,7 @@
                 <div class="col-3">
                     <mat-form-field class="w-100">
                         <mat-label>Apellido 2</mat-label>
-                        <input matInput name="exogena_apellido2" [(ngModel)]="exogenous_data.exogena_apellido2" required
+                        <input matInput name="exogena_apellido2" [(ngModel)]="exogenous_data.exogena_apellido2" 
                                #apellido2="ngModel">
                         <mat-error *ngIf="apellido2.invalid && apellido2.touched">Este campo es requerido</mat-error>
                     </mat-form-field>

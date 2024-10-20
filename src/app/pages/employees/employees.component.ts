@@ -101,12 +101,23 @@ export class EmployeesComponent implements OnInit {
       
       if (result.isConfirmed) {
         this.authService.deleteUser(id_user).subscribe((data: any) => {
-          Swal.fire({
-            title: "Se ha eliminado correctamente",
-            icon: "success"
-          });
+          console.log(data.status);
+          
+          if(data.status == 0){
+            Swal.fire({
+              title: "No se puede eliminar el usuario, tiene viajes asociados",
+              text: "si desea, puede desactivar el usuario",
+              icon: "error"
+            });
+          }else{
+            Swal.fire({
+              title: "Se ha eliminado correctamente",
+              icon: "success"
+            });
+            this.loadData();
+          }
         });
-        this.loadData();
+       
       }
 
     });

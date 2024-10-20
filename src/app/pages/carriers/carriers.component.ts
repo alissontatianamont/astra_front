@@ -62,14 +62,25 @@ export class CarriersComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.carriersService.deleteCarrier(carrier_id).subscribe({
-          next:(response)=>{
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Transportadora creada con éxito",
-              showConfirmButton: false,
-              timer: 1500
-            });
+          next:(data: any)=>{
+            if (data.status == 1) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Transportadora eliminada con éxito",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }else{
+              Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "No se puede eliminar la transportadora, tiene viajes asociados",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }
+
           },
           error:(error)=>{
             console.error('bad',error);

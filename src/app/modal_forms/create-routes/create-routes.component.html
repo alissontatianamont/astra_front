@@ -1,17 +1,17 @@
 <h2 mat-dialog-title>Generar nuevo viaje</h2>
-<form (ngSubmit)="OnSubmit()" #userForm="ngForm">
+<form (ngSubmit)="OnSubmit()" #routesForm="ngForm">
 <mat-dialog-content class="mat-typography ">
   <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-md-4">
           <mat-form-field>
             <mat-label>N° manifiesto</mat-label>
-            <input   matInput name="viaje_num_manifiesto" [(ngModel)]="routes.viaje_num_manifiesto">
+            <input   matInput name="viaje_num_manifiesto" [(ngModel)]="routes.viaje_num_manifiesto" required #viaje_num_manifiesto="ngModel">
           </mat-form-field>
         </div>
         <div class="col-12 col-md-4">
           <mat-form-field>
-            <input matInput name="viaje_fecha_manifiesto" [(ngModel)]="routes.viaje_fecha_manifiesto" [matDatepicker]="manifPicker" placeholder="Fecha manifiesto" >
+            <input matInput name="viaje_fecha_manifiesto" [(ngModel)]="routes.viaje_fecha_manifiesto" [matDatepicker]="manifPicker" placeholder="Fecha manifiesto" required #viaje_fecha_manifiesto="ngModel">
             <mat-datepicker-toggle matSuffix [for]="manifPicker"></mat-datepicker-toggle>
             <mat-datepicker #manifPicker></mat-datepicker>
           </mat-form-field>
@@ -19,7 +19,7 @@
         <div class="col-12 col-md-4">
           <mat-form-field>
             <mat-label>Placa vehiculo</mat-label>
-            <input name="viaje_placa" [(ngModel)]="routes.viaje_placa" matInput>
+            <input name="viaje_placa" [(ngModel)]="routes.viaje_placa" matInput  required #viaje_placa="ngModel">
           </mat-form-field>
         </div>
     </div>
@@ -27,18 +27,18 @@
       <div class="col-md-4 col-12">
         <mat-form-field>
           <mat-label>Lugar inicio</mat-label>
-          <input name="viaje_destino_inicio" [(ngModel)]="routes.viaje_destino_inicio" matInput>
+          <input name="viaje_destino_inicio" [(ngModel)]="routes.viaje_destino_inicio" matInput required #viaje_destino_inicio="ngModel">
         </mat-form-field>
       </div>
       <div class="col-md-4 col-12">
         <mat-form-field>
           <mat-label>Lugar destino</mat-label>
-          <input name="viaje_destino_llegada" [(ngModel)]="routes.viaje_destino_llegada" matInput>
+          <input name="viaje_destino_llegada" [(ngModel)]="routes.viaje_destino_llegada" matInput required #viaje_destino_llegada="ngModel">
         </mat-form-field>
       </div>
       <div class="col-md-4 col-12">
         <mat-form-field>
-          <input matInput name="viaje_fecha_inicio"  [(ngModel)]="routes.viaje_fecha_inicio" [matDatepicker]="startPicker" placeholder="Fecha inicio" >
+          <input matInput name="viaje_fecha_inicio"  [(ngModel)]="routes.viaje_fecha_inicio" [matDatepicker]="startPicker" placeholder="Fecha inicio" required #viaje_fecha_inicio="ngModel">
           <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
           <mat-datepicker #startPicker></mat-datepicker>
         </mat-form-field>
@@ -60,7 +60,7 @@
       <div class="col-md-4 col-12" *ngIf="rol_user !== 1">
         <mat-form-field class="w-100">
           <mat-label>asignar conductor</mat-label>
-          <mat-select name="fo_viaje_usuario" [(ngModel)]="routes.fo_viaje_usuario">
+          <mat-select name="fo_viaje_usuario" [(ngModel)]="routes.fo_viaje_usuario" required #fo_viaje_usuario="ngModel">
             <mat-option *ngFor="let driver of drivers" [value]="driver.usuario_id">
               {{ driver.nombre_usuario }}
             </mat-option>
@@ -82,7 +82,7 @@
       <div class="col-md-6 col-12">
           <mat-form-field class="w-100">
             <mat-label>asignar transportadora</mat-label>
-            <mat-select name="fo_viaje_transportadora" [(ngModel)]="routes.fo_viaje_transportadora">
+            <mat-select name="fo_viaje_transportadora" [(ngModel)]="routes.fo_viaje_transportadora" required #fo_viaje_transportadora="ngModel">
               <mat-option *ngFor="let carrier of carriers" [value]="carrier.transportadora_id">
                 {{ carrier.transportadora_razon_social  }}
               </mat-option>
@@ -95,13 +95,13 @@
       <div class="col-12 col-md-4 d-flex justify-content-center">
         <mat-form-field>
           <mat-label >Flete</mat-label>
-          <input name="viaje_flete" appAllowOnlyNumbers [(ngModel)]="routes.viaje_flete" matInput>
+          <input name="viaje_flete" appAllowOnlyNumbers [(ngModel)]="routes.viaje_flete" matInput required #viaje_flete="ngModel">
         </mat-form-field>
       </div>
       <div class="col-12 col-md-4 d-flex justify-content-center">
         <mat-form-field>
           <mat-label>Anticipo</mat-label>
-          <input name="viaje_anticipo" appAllowOnlyNumbers [(ngModel)]="routes.viaje_anticipo" matInput>
+          <input name="viaje_anticipo" appAllowOnlyNumbers [(ngModel)]="routes.viaje_anticipo" matInput required #viaje_anticipo="ngModel">
         </mat-form-field>
       </div>
       <div class="col-12 col-md-4 d-flex justify-content-center">
@@ -115,13 +115,13 @@
       <div class="col-12 col-md-4 d-flex justify-content-center">
         <mat-form-field>
           <mat-label >Valor neto a pagar</mat-label>
-          <input name="viaje_neto_pago" appAllowOnlyNumbers [(ngModel)]="routes.viaje_neto_pago" matInput>
+          <input name="viaje_neto_pago" appAllowOnlyNumbers [(ngModel)]="routes.viaje_neto_pago" matInput required #viaje_neto_pago="ngModel">
         </mat-form-field>
       </div>
       <div class="col-12    col-md-4 d-flex justify-content-center">
         <mat-form-field>
           <mat-label>Porcentaje conductor</mat-label>
-          <input name="viaje_porcentaje_conductor" appAllowOnlyNumbers [(ngModel)]="routes.viaje_porcentaje_conductor" matInput>
+          <input name="viaje_porcentaje_conductor" appAllowOnlyNumbers [(ngModel)]="routes.viaje_porcentaje_conductor" matInput required #viaje_porcentaje_conductor="ngModel">
         </mat-form-field>
       </div>
       <div class="col-12    col-md-4 d-flex justify-content-center">
@@ -141,7 +141,7 @@
       </div>
     </div>
   </div>
-  <button mat-button type="submit">Guardar</button>
+  <button mat-button type="submit" class="w-100 btn btn-danger btn-block" [disabled]="routesForm.invalid">Guardar</button>
 </mat-dialog-content>
 </form>
 <mat-dialog-actions align="end">

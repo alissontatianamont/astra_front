@@ -17,10 +17,11 @@ export class AuthService {
   getUser($id){
     return this.http.get(`${this.base_api}users/${$id}`);
   }
-  getAvatarUser(avatar: string): Observable<any> {
-    return this.http.get(`${this.base_api}images/profile/${avatar}`);
-  }
-  
+
+  getAvatarUser(avatar: string): Observable<Blob> {
+    return this.http.get(`${this.base_api}images/profile/${avatar}`, { responseType: 'blob' });
+}
+
   createUser(user: any): Observable<any>{
 
     return this.http.post(`${this.base_api}users`,user);

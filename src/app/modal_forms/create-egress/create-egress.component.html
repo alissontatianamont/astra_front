@@ -2,7 +2,7 @@
     *ngIf="globalEgressData.gasto_global === 0">Único</span></h2>
 <h2 mat-dialog-title *ngIf="egress_id !== undefined">Editar gasto <span *ngIf="globalEgressData.gasto_global === 1">Global</span> <span
     *ngIf="globalEgressData.gasto_global === 0">Único</span></h2>
-<form (ngSubmit)="OnSubmit()" #userForm="ngForm">
+<form (ngSubmit)="OnSubmit()" #egressForm="ngForm">
   <mat-dialog-content class="mat-typography">
     <div class="container-fluid">
       <div class="row">
@@ -53,7 +53,7 @@
           *ngIf="breakdownEgressData.egreso_exogenable === 1">
           <mat-form-field class="w-100">
             <mat-label>Empresa exogena</mat-label>
-            <mat-select [(ngModel)]='breakdownEgressData.fo_egreso_proveedor' name="fo_egreso_proveedor">
+            <mat-select [(ngModel)]='breakdownEgressData.fo_egreso_proveedor' name="fo_egreso_proveedor" required #fo_egreso_proveedor="ngModel">
               <mat-option *ngFor="let exogen of exogenous" [value]="exogen.exogena_id">
                 {{ getDisplayName(exogen) }}
               </mat-option>
@@ -105,7 +105,7 @@
           *ngIf="item.egreso_exogenable === 1">
           <mat-form-field class="w-100">
             <mat-label>Empresa exogena</mat-label>
-            <mat-select [(ngModel)]='item.fo_egreso_proveedor' name="fo_egreso_proveedor_{{i}}">
+            <mat-select [(ngModel)]='item.fo_egreso_proveedor' name="fo_egreso_proveedor_{{i}}" required #fo_egreso_proveedor="ngModel">
               <mat-option *ngFor="let exogen of exogenous" [value]="exogen.exogena_id">
                 {{ getDisplayName(exogen) }}
               </mat-option>
@@ -149,7 +149,7 @@
     </div>
 
 
-    <button mat-button type="submit">Guardar</button>
+    <button mat-button type="submit" class="w-100 btn btn-danger btn-block"  [disabled]="egressForm.invalid">Guardar</button>
   </mat-dialog-content>
 </form>
 <mat-dialog-actions align="end">

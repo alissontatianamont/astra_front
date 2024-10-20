@@ -288,7 +288,6 @@ export class CreateEgressComponent implements OnInit {
       let breakdownEgresoValor = this.breakdownEgressData.egreso_valor.toString().replace(/,/g, '');
       this.formData.append('egreso_valor', parseFloat(breakdownEgresoValor));
     }
-
     if (this.egress_id !== undefined) {
       this.formData.append('egreso_id', this.globalEgressData.gasto_global === 1 ? this.egress_id : this.breakdownEgressData.egreso_id);
       

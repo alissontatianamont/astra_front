@@ -1,4 +1,4 @@
-import { Component, OnInit,EventEmitter , Output,Inject } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,7 +12,7 @@ export interface EmployeeData {
   cedula: string,
   rol: string,
   telefono: string,
-  fecha_contratacion:Date,
+  fecha_contratacion: Date,
   avatar: string
 }
 @Component({
@@ -41,16 +41,16 @@ export class CreateEmployeesComponent implements OnInit {
     fecha_contratacion: new Date(),
     avatar: ''
   };
-  
+
   @Output() userCreated = new EventEmitter<void>();
 
-  constructor(private authService: AuthService, private dialogRef: MatDialogRef<CreateEmployeesComponent>,@Inject(MAT_DIALOG_DATA) public data:any) {
-  
-    if (data?.id_user) {this.id_user = data.id_user;}
-  
+  constructor(private authService: AuthService, private dialogRef: MatDialogRef<CreateEmployeesComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+
+    if (data?.id_user) { this.id_user = data.id_user; }
+
   }
 
-   getRepeatMail(): Promise<boolean> {
+  getRepeatMail(): Promise<boolean> {
     return new Promise((resolve) => {
       this.authService.getUsers().subscribe((data: any) => {
         let emails = data.map((user: any) => user.email);
@@ -70,54 +70,54 @@ export class CreateEmployeesComponent implements OnInit {
       });
     });
   }
-  
-   togglePasswordVisibility() {
+
+  togglePasswordVisibility() {
     this.hide = !this.hide;
   }
 
   ngOnInit(): void {
-   
-    
-    
-    
-    if (this.id_user != null ) { 
-         this.authService.getUser(this.id_user).subscribe( (data: any) => {
-      
-      this.user = {
-        nombre_usuario: data.nombre_usuario,
-        email: data.email,
-        contrasena: data.contrasena,
-        estado_usuario: data.estado_usuario,
-        cedula: data.cedula,
-        rol: data.rol,
-        telefono: data.telefono,
-        fecha_contratacion: data.fecha_contratacion,
-        avatar: `${this.base_api}images/profile/`+data.avatar
-      };
-    },);
-    this.passwordRequired = false;
-    }else{
+
+
+
+
+    if (this.id_user != null) {
+      this.authService.getUser(this.id_user).subscribe((data: any) => {
+
+        this.user = {
+          nombre_usuario: data.nombre_usuario,
+          email: data.email,
+          contrasena: data.contrasena,
+          estado_usuario: data.estado_usuario,
+          cedula: data.cedula,
+          rol: data.rol,
+          telefono: data.telefono,
+          fecha_contratacion: data.fecha_contratacion,
+          avatar: `${this.base_api}images/profile/` + data.avatar
+        };
+      },);
+      this.passwordRequired = false;
+    } else {
       this.passwordRequired = true;
     }
     console.log(this.passwordRequired);
-    
+
   }
-  
-  getFile(event: any):any{
+
+  getFile(event: any): any {
     const file = event.target.files[0];
     if (file) {
       this.file_user = file;
-    }else{
+    } else {
       this.file_user = null;
     }
-      
+
   }
 
 
-async OnSubmit() {
-  let getRepeatMail = await this.getRepeatMail();  
+  async OnSubmit() {
+    
 
-  if (getRepeatMail == false) {  
+
     let fecha = new Date(this.user.fecha_contratacion);
     let formatoFecha = new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
     let fechaFormateada = formatoFecha.format(fecha);
@@ -155,24 +155,27 @@ async OnSubmit() {
         },
       });
     } else {
-      this.authService.createUser(this.formdata).subscribe({
-        next: (response) => {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Usuario creado con éxito",
-            showConfirmButton: false,
-            timer: 1500
-          });
-          this.userCreated.emit();
-          this.dialogRef.close();
-        },
-        error: (error) => {
-          console.error('bad', error);
-        },
-      });
+      let getRepeatMail = await this.getRepeatMail();
+      if (getRepeatMail == false) {
+        this.authService.createUser(this.formdata).subscribe({
+          next: (response) => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Usuario creado con éxito",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.userCreated.emit();
+            this.dialogRef.close();
+          },
+          error: (error) => {
+            console.error('bad', error);
+          },
+        });
+      };
     }
+
   }
-}
 
 }

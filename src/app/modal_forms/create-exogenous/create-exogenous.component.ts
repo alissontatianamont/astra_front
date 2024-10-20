@@ -80,6 +80,7 @@ export class CreateExogenousComponent implements OnInit {
   }
 
   OnSubmit() {
+    
     this.formData = new FormData();
     this.formData.append('exogena_nit', this.exogenous_data.exogena_nit);
     this.formData.append('exogena_dv', this.exogenous_data.exogena_dv);
@@ -93,6 +94,8 @@ export class CreateExogenousComponent implements OnInit {
     this.formData.append('exogena_departamento', this.exogenous_data.exogena_departamento);
     this.formData.append('exogena_tipo', this.exogenous_data.exogena_tipo);
     this.formData.append('exogena_estatus', 1);
+    // console.log(this.formData);
+    // return;
     if (this.exogenous_id !== undefined) {
       this.exogenousService.updateExogenous(this.exogenous_id, this.formData).subscribe({
         next: (response) => {

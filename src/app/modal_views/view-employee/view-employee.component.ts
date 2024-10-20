@@ -44,12 +44,18 @@ export class ViewEmployeeComponent implements OnInit {
   }
   
   getImageUrl() {
-    this.authService.getAvatarUser(this.avatarName).subscribe((data: any) => {
-      this.imageSrc = data.url;
+    this.authService.getAvatarUser(this.avatarName).subscribe((response: Blob) => {
+        const reader = new FileReader();
+        reader.onload = (event: any) => {
+            this.imageSrc = event.target.result; // Asigna la imagen a la propiedad para mostrarla
+        };
+        reader.readAsDataURL(response); // Lee el Blob como URL de datos
     }, error => {
-      console.error('Error al cargar la imagen:', error);
+        console.error('Error al cargar la imagen:', error);
     });
-  }
+}
+
+
 
   ngOnInit(): void {
 

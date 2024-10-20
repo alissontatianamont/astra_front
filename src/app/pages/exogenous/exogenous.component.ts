@@ -76,21 +76,47 @@ export class ExogenousComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.exogenousService.deleteExogenous(exogenous_id).subscribe({
-          next: (response) => {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Información exógena eliminada con éxito",
-              showConfirmButton: false,
-              timer: 1500
-            });
-            this.loadData();
+          next: (data: any) => {
+            if (data.status == 1) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Información exógena eliminada con éxito",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              this.loadData();
+            } else if (data.status == 0) {
+              Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "No se puede eliminar la empresa porque tiene gastos asociados.",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            } else if (data.status == 2) {
+              Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Exógena no encontrada.",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }
           },
           error: (error) => {
             console.error('bad', error);
-          },
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Error al eliminar la información exógena.",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
         });
       }
+      
       this.loadData();
     });
 
